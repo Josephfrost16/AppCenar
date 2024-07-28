@@ -24,19 +24,20 @@ require('./models/Login/commerceType');
 const userRoutes = require('./routes/Login/userRoutes');
 const commerceRoutes = require('./routes/Login/commerceRoutes');
 const commerceType = require('./routes/Login/commerceType');
+const authenticationRoutes = require('./routes/Login/authRoute');
 
 // Creando los endPoints
 app.use('/api/user',userRoutes);
 app.use('/api/commerce', commerceRoutes);
 app.use('/api/commerceType', commerceType);
-
+app.use('/api/auth',authenticationRoutes);
 
 //  Sincronizando Sequelize
 sequelize.sync({force:true})
 .then(()=>{
     console.log('Database Connection was successfully'); 
     // servidor escuchando
-
+    
     // insertando datos para el force
     createUserTypes();
     createCommerceTypes();
