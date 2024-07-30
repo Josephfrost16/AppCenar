@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/auth/register.css">
+    <link rel="icon" href="../../src/onlywing.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Registrate</title>
+</head>
+<body>
+    <a href="../../index.html"><img src="../../src/logoText.png" alt="" class="logo"></a>
+    <div class="card">
+        <div class="header">
+            <label for="">Registrate</label>
+            <nav class="steps">
+               <li class="step active" id="step1">1</li>
+                <div class="line" id="line1"></div>
+                <li class="step" id="step2">2</li>
+                <div class="line" id="line2"></div>
+                <li class="step" id="step3">3</li>
+                <div class="line" id="line3"></div>
+                <li class="step" id="step4">4</li>
+            </nav>
+        </div>
+
+        <div class="main">
+
+            <div class="type flex">
+                <form class="" action="">
+                    <p>Correo Electronico<span>*</span></p>
+                    <input class="" type="text" id="email" placeholder="Example@gmail.com">
+                    <p>¿Que deseas ser?</p>
+                    <select name="accountType" id="accountType" title="accountType">
+                        <option value="cliente">Cliente</option>
+                        <option value="comercio">Comercio</option>
+                        <option value="delivery">Repartidor</option>
+                    </select>
+                </form>
+                <button class="btn next" id="nextType"> Siguiente </button>
+            </div>
+
+            <div class="contact flex none">
+                <form class="" action="">
+                    <p>Nombre<span>*</span></p>
+                    <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
+                    <p>Apellido (opcional)</p>
+                    <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
+                    <p>Sube una foto</p>
+                    <input class="capitalize" type="file" id="commerceLogo" placeholder="Escribe tu apellido">
+                </form>
+                <button class="btn next" id="nextContact"> Siguiente </button>
+            </div>
+
+            <div class="commerce flex none">
+                <form class="" action="">
+                    <p>Nombre de tu negocio<span>*</span></p>
+                    <input class="capitalize" type="text" id="commerceName" placeholder="Escribe tu nombre...">
+                    <p>¿De que es tu negocio?</p>
+                    <select name="commerce" id="commerce">
+                        <option value="">Farmacia</option>
+                    </select>
+                    <p>Logo</p>
+                    <input class="capitalize" type="file" id="commerceLogo">
+                </form>
+                <button class="btn next" id="nextCommerce"> Siguiente </button>
+            </div>
+
+            <div class="phone flex none">
+                <form class="" action="">
+                    <p>Pais</p>
+                    <select name="country" id="country" title="Pais">
+                        <option value="">Republica Dominicana</option>
+                    </select>
+                    <p>Telefono<span>*</span></p>
+                    <input class="" type="text" id="phone" placeholder="___-___-___">
+                    <p>Codigo Postal<span>*</span></p>
+                    <input class="" type="text" id="postalCode" placeholder="11003">
+                </form>
+                <button class="btn next" id="nextPhone"> Siguiente </button>
+            </div>
+
+            <div class="password flex none">
+                <form class="" action="">
+                    <p>Contraseña<span>*</span></p>
+                    <input class="" type="password" id="password" placeholder="***********">
+                    <p>Confirmar Contraseña<span>*</span></p>
+                    <input class="" type="password" id="confirmPass" placeholder="***********">
+                </form>
+                <button class="btn next" id="nextPassword"> Crear Cuenta </button>
+            </div>
+
+            <p class="done">¿Ya tienes una cuenta? <a href="./login.html">Inicia Sesión</a></p>
+        </div>
+
+    </div>
+
+    <script src="../../javascript/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+body{
+    display: flex;
+    flex-direction: column;
+    background-color: #EEF0F3;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.card{
+    border-radius: 2rem;
+    box-shadow: 0px 0px 4px #d8d8d8;
+}
+
+.header{
+    background-color: #FFF;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0px 3px 4px -1px #d8d8d8;
+    z-index: 1;
+    position: relative;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+}
+
+.header label{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.steps{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.line{
+    border: solid 1px #a5a4a4;
+    width: 100px;
+}
+
+.step{
+    color: #a5a4a4;
+    font-weight: bold;
+    padding: 16px;
+    width: 55px;
+    border-radius: 4rem;
+    border: solid 2px;
+    text-align: center;
+    justify-content: center;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.active{
+    color: #FFF;
+    border: 2px solid #ffd500;
+    background-color: #ffd500;
+}
+
+.lineActive{
+    border: solid 1px #ffd500 !important;
+}
+
+.main{
+    background-color: #FBFBFC;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
+    z-index: -1;
+}
+
+.main p{
+    color: #858585;
+    font-weight: 500;
+}
+
+.main form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.main form input{
+    padding: 0.5rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px #d4d2d2;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.main form select{
+    padding: 0.5rem;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 1px #d4d2d2;
+    outline: none;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    
+}
+
+select option:hover{
+    background-color: #ffd500 !important;
+}
+
+span{
+    color: red;
+}
+
+.capitalize{
+    text-transform: capitalize;
+}
+
+.flex{
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s forwards;
+}
+
+.next{
+    margin-top: 1rem;
+    background: #EBC503;
+    color: #FFF;
+    align-items: stretch !important;
+}
+
+
+
+.done{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.done a{
+    transition: 0.1s;
+    color: #EBC503;
+}
+
+.done a:hover{
+    color: #5f5003;
+}
+
