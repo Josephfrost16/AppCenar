@@ -58,13 +58,12 @@
     border: 1px solid #000000;
     background-color: #Ffffff;
     width: 80px;
-    border-radius: 10%;
+    border-radius: 30px;
     margin: auto;
     color: #000000;
   }
   
   .cardBtn:hover{
     cursor: pointer;
-    background-color: #dcdfc8;
-    color: #000000;
+    background-color: #d5d662;
   }
