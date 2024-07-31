@@ -1,0 +1,111 @@
+body{
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 9rem;
+}
+
+.header{
+    display: flex;
+    margin-bottom: 2rem;
+    align-items: center;
+    font-weight: 600;
+    gap:5rem;
+    
+}
+
+.header img{
+    max-width: 200px;
+    animation: fadeIn 0.5s forwards;
+}
+
+.menu{
+    display: flex;
+    list-style: none;
+    gap: 5rem;
+    flex-grow: 1;
+    justify-content: end;
+    font-size: 1.1rem;
+    color: #474749;
+}
+
+.menu li{
+    cursor:pointer;
+}
+
+.menu li:hover{
+    color: #EBC503;
+}
+
+.headerBtnContainer{
+    display: flex;
+    gap: 1rem;
+}
+
+
+.main{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 15rem;
+    flex-grow: 1;
+    animation: fadeIn 0.5s forwards;
+}
+
+
+.textContent{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    gap: 3rem;
+    justify-content: center;
+    padding: 1rem 2rem;
+}
+
+.textContent label{
+    font-size: 4rem;
+    font-family: Fjalla One;
+}
+
+.description{
+    font-size: 1.2rem;
+}
+
+.imageContent{
+    flex-grow: 1;
+    padding:1rem 0rem 0rem 2rem;
+    animation: fadeIn 0.5s forwards;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .main{
+        grid-template-columns: 1fr;
+    }
+
+    body{
+        margin: 1rem;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .main{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .main{
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .main{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
