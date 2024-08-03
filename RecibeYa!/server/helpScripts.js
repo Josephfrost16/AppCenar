@@ -1,7 +1,7 @@
 const sequelize = require('./database/conexion');
-const UserType = require('./models/Login/userType');
-const commerceType = require('./models/Login/commerceType');
-const user = require('./models/Login/user');
+const UserType = require('./models/User/userType');
+const commerceType = require('./models/Commerce/commerceType');
+const user = require('./models/User/user');
 
 const createUserTypes = async () =>{
     try {

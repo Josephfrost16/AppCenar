@@ -10,6 +10,10 @@ const commerceType = sequelize.define('commerce_type', {
     type:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    icon:{
+        type: DataTypes.STRING,
+        allowNull: true
     }
 })
 

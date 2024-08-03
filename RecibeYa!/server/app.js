@@ -14,11 +14,17 @@ app.use(cors());
 
 
 // Importando los modelos
-require('./models/Login/user');
-require('./models/Login/userType');
-require('./models/Login/commerce');
-require('./models/Login/commerceType');
-
+require('./models/User/user');
+require('./models/User/userType');
+require('./models/Commerce/commerce');
+require('./models/Commerce/commerceType');
+require('./models/Commerce/commerce_category');
+require('./models/other/favorites');
+require('./models/Products/product_category');
+require('./models/Products/product');
+require('./models/other/direction');
+require('./models/Orders/orders');
+require('./models/Orders/orders_details');
 
 // Importando las rutas
 const userRoutes = require('./routes/Login/userRoutes');

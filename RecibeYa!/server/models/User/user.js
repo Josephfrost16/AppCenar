@@ -1,8 +1,9 @@
 const sequelize = require("../../database/conexion");
 const {DataTypes} = require('sequelize');
-const commerceType = require('./commerceType');
+const userType = require("./userType");
 
-const commerce = sequelize.define('commerce',{
+
+const User = sequelize.define('User',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -12,14 +13,18 @@ const commerce = sequelize.define('commerce',{
         type:DataTypes.STRING,
         allowNull: false
     }, 
-    commerceTypeId:{
+    lastName:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
+    accountType:{
         type:DataTypes.INTEGER,
         references: {
-            model: commerceType,
+            model: userType,
             key: 'id'
         }
     },
-    logo:{
+    photo:{
         type:DataTypes.STRING,
         allowNull:true
     },
@@ -46,11 +51,17 @@ const commerce = sequelize.define('commerce',{
     state:{
         type:DataTypes.INTEGER,
         defaultValue: 0
+    },
+
+    // Check this out:
+    delivery_state:{
+        type: DataTypes.INTEGER,
+        defaultValue: null
     }
 
 });
 
-commerceType.hasMany(commerce, {foreignKey: 'commerceTypeId'});
-commerce.belongsTo(commerceType, {foreignKey: 'commerceTypeId'});
+userType.hasMany(User, {foreignKey: 'accountType'});
+User.belongsTo(userType, {foreignKey: 'accountType'});
 
-module.exports = commerce;
+module.exports = User;

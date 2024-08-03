@@ -1,9 +1,10 @@
 const sequelize = require("../../database/conexion");
 const {DataTypes} = require('sequelize');
-const userType = require("./userType");
 
+const commerceType = require('./commerceType');
+const category = require('./commerce_category');
 
-const User = sequelize.define('User',{
+const commerce = sequelize.define('commerce',{
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -13,18 +14,14 @@ const User = sequelize.define('User',{
         type:DataTypes.STRING,
         allowNull: false
     }, 
-    lastName:{
-        type:DataTypes.STRING,
-        allowNull:true
-    },
-    accountType:{
+    commerceTypeId:{
         type:DataTypes.INTEGER,
         references: {
-            model: userType,
+            model: commerceType,
             key: 'id'
         }
     },
-    photo:{
+    logo:{
         type:DataTypes.STRING,
         allowNull:true
     },
@@ -44,6 +41,14 @@ const User = sequelize.define('User',{
         type:DataTypes.STRING,
         allowNull:false
     },
+    category_id:{
+        type: DataTypes.INTEGER,
+        references: {
+            model: category,
+            key: 'id'
+        },
+        allowNull: false
+    },
     password:{
         type:DataTypes.STRING,
         allowNull:false
@@ -52,10 +57,13 @@ const User = sequelize.define('User',{
         type:DataTypes.INTEGER,
         defaultValue: 0
     }
-
 });
 
-userType.hasMany(User, {foreignKey: 'accountType'});
-User.belongsTo(userType, {foreignKey: 'accountType'});
+commerceType.hasMany(commerce, {foreignKey: 'commerceTypeId'});
 
-module.exports = User;
+category.hasMany(commerce,{foreignKey:'category_id'});
+
+commerce.belongsTo(commerceType, {foreignKey: 'commerceTypeId'});
+commerce.belongsTo(category, {foreignKey: 'category_id'});
+
+module.exports = commerce;
