@@ -16,13 +16,18 @@ app.use(cors());
 // Importando los modelos
 require('./models/User/user');
 require('./models/User/userType');
+
 require('./models/Commerce/commerce');
 require('./models/Commerce/commerceType');
 require('./models/Commerce/commerce_category');
+
 require('./models/other/favorites');
+
 require('./models/Products/product_category');
 require('./models/Products/product');
+
 require('./models/other/direction');
+
 require('./models/Orders/orders');
 require('./models/Orders/orders_details');
 

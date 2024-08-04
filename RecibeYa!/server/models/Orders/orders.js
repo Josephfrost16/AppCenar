@@ -2,7 +2,7 @@ const sequelize = require("../../database/conexion");
 const {DataTypes} = require('sequelize');
 
 const user = require("../User/user");
-const order_details = require("./orders_details");
+const direction = require("../other/direction");
 
 const orders = sequelize.define('orders', {
     id:{
@@ -14,6 +14,13 @@ const orders = sequelize.define('orders', {
         type:DataTypes.INTEGER,
         references: {
             model: user,
+            key: 'id'
+        }
+    },
+    direction_id:{
+        type:DataTypes.INTEGER,
+        references: {
+            model: direction,
             key: 'id'
         }
     },
@@ -33,7 +40,11 @@ const orders = sequelize.define('orders', {
 
 user.hasMany(orders, {foreignKey: 'user_id'});
 
+// Checar esta relacion:
+direction.hasOne(orders,{foreignKey: 'direction_id'});
+
 orders.belongsTo(user, {foreignKey: 'user_id'});
+orders.belongsTo(direction, {foreignKey: 'direction_id'});
 
 module.exports = orders;
 

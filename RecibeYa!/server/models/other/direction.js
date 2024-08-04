@@ -3,7 +3,7 @@ const {DataTypes} = require('sequelize');
 
 const user = require("../User/user");
 
-const direction = sequelize.define('direction   ', {
+const direction = sequelize.define('directions', {
     id:{
         type: DataTypes.INTEGER,
         primaryKey: true,

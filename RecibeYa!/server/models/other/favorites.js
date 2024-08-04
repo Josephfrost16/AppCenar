@@ -33,4 +33,3 @@ favorites.belongsTo(user, {foreignKey: 'user_id'});
 favorites.belongsTo(commerce, {foreignKey: 'commerce_id'});
 
 module.exports = favorites;
-
