@@ -1,4 +1,9 @@
-const User = require('../../models/Login/user');
+const User = require('../../models/User/user');
+
+const bcrypt = require('bcrypt');
+
+const Encryption = require('../../helpers/Encryption');
+
 
 exports.getAll = async (req,res) =>{
     try {
@@ -22,11 +27,16 @@ exports.getById = async (req,res) =>{
     }
 }
 
+// Metodo de registros de usuario
 exports.create = async (req,res) =>{
     try {
         const {name, lastName, accountType, photo, email, country, phone,zip,password} = req.body;
+
+        // Encriptacion de clave:
+        const encryptedPassword = await Encryption.encrypt(password);
+        
         const user = await User.create({
-          name:name,
+          name: name,
           lastName:lastName,
           accountType:accountType,
           photo:photo,
@@ -34,8 +44,9 @@ exports.create = async (req,res) =>{
           country:country,
           phone:phone,
           zip:zip,
-          password:password
+          password:encryptedPassword
         });
+
         res.status(200).json(user);
     } catch (error) {
         console.error('create error', error)
