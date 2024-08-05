@@ -52,7 +52,7 @@ app.use('/api/orders_details',orders_details_routes);
 app.use('/api/orders', orders_routes);
 app.use('/api/directions',directions_routes);
 app.use('/api/favorites',favorites_routes);
-app.use('/api/product_category', product_category_routes);
+// app.use('/api/product_category', product_category_routes);
 app.use('/api/product_routes', product_routes);
 
 //  Sincronizando Sequelize
