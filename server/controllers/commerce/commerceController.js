@@ -3,7 +3,6 @@ const Commerce = require('../../models/Commerce/commerce');
 exports.getAll = async (req,res) =>{
     try {
         const commerce = await Commerce.findAll();
-        console.log(commerce);
         res.status(200).json(commerce);
         
     } catch (error) {
@@ -43,7 +42,19 @@ exports.create = async (req,res) =>{
 
 exports.update = async (req,res) =>{
     try {
-        
+        const {id} = req.params;
+        const {name,commerceTypeId,logo,email,country,phone,zip,password} = req.body
+        const commerce = await Commerce.update({
+            name:name,
+            commerceTypeId:commerceTypeId,
+            logo:logo,
+            email:email,
+            country:country,
+            phone:phone,
+            zip:zip,
+            password:password
+            },{where:{id:id}});
+        res.status(200).json(commerce);
     } catch (error) {
         res.status(500).json({'error':error});
     }
@@ -51,7 +62,9 @@ exports.update = async (req,res) =>{
 
 exports.delete = async (req,res) =>{
     try {
-        
+        const {id} = req.params
+        const commerce = await Commerce.destroy({where:{id:id}})
+        res.status(200).json(commerce);
     } catch (error) {
         res.status(500).json({'error':error});
     }
