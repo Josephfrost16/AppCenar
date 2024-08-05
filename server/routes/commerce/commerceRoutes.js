@@ -1,4 +1,4 @@
-const controller = require('../../controllers/Login/commerceController');
+const controller = require('../../controllers/commerce/commerceController');
 const router = require('express').Router();
 
 router.get('/', controller.getAll);

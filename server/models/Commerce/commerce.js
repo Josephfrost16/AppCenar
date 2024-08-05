@@ -26,7 +26,8 @@ const commerce = sequelize.define('commerce',{
     },
     email:{
         type:DataTypes.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     country:{
         type:DataTypes.STRING,
