@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin } = require("./helpScripts")
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts")
 
 // Creando las variables intermediarias
 const app = express();
@@ -33,8 +33,8 @@ require('./models/Orders/orders_details');
 
 // Importando las rutas
 const userRoutes = require('./routes/Login/userRoutes');
-const commerceRoutes = require('./routes/Login/commerceRoutes');
-const commerceType = require('./routes/Login/commerceType');
+const commerceRoutes = require('./routes/commerce/commerceRoutes');
+const commerceType = require('./routes/commerce/commerceType');
 const authenticationRoutes = require('./routes/Login/authRoute');
 
 // Creando los endPoints
@@ -53,6 +53,7 @@ sequelize.sync({force:true})
     createUserTypes();
     createCommerceTypes();
     createSuperAdmin();
+    createCommerce();
     
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)

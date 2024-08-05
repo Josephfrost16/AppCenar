@@ -1,0 +1,3 @@
+./server/database/conexion.js 
+start-database-server.bat
+stop-database-server.bat

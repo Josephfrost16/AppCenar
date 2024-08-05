@@ -2,7 +2,6 @@ const sequelize = require("../../database/conexion");
 const {DataTypes} = require('sequelize');
 
 const commerceType = require('./commerceType');
-const category = require('./commerce_category');
 
 const commerce = sequelize.define('commerce',{
     id:{
@@ -27,7 +26,8 @@ const commerce = sequelize.define('commerce',{
     },
     email:{
         type:DataTypes.STRING,
-        allowNull:false
+        allowNull:false,
+        unique:true
     },
     country:{
         type:DataTypes.STRING,
@@ -41,14 +41,6 @@ const commerce = sequelize.define('commerce',{
         type:DataTypes.STRING,
         allowNull:false
     },
-    category_id:{
-        type: DataTypes.INTEGER,
-        references: {
-            model: category,
-            key: 'id'
-        },
-        allowNull: false
-    },
     password:{
         type:DataTypes.STRING,
         allowNull:false
@@ -60,10 +52,6 @@ const commerce = sequelize.define('commerce',{
 });
 
 commerceType.hasMany(commerce, {foreignKey: 'commerceTypeId'});
-
-category.hasMany(commerce,{foreignKey:'category_id'});
-
 commerce.belongsTo(commerceType, {foreignKey: 'commerceTypeId'});
-commerce.belongsTo(category, {foreignKey: 'category_id'});
 
 module.exports = commerce;
