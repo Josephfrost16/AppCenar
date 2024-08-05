@@ -23,7 +23,7 @@ require('./models/Commerce/commerce_category');
 
 require('./models/other/favorites');
 
-require('./models/Products/product_category');
+// require('./models/Products/product_category');
 require('./models/Products/product');
 
 require('./models/other/direction');
