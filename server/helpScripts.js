@@ -4,6 +4,8 @@ const commerceType = require('./models/Commerce/commerceType');
 const user = require('./models/User/user');
 const commerce = require('./models/Commerce/commerce')
 
+const Encryption = require('./helpers/Encryption');
+
 const createUserTypes = async () =>{
     try {
         await UserType.bulkCreate([
@@ -32,6 +34,8 @@ const createCommerceTypes = async () =>{
 
 const createSuperAdmin = async () =>{
     try {
+        const EncryptedPassword = await Encryption.encrypt("admin123");
+
         await user.create(
             {
                 name:"Admin",
@@ -42,7 +46,7 @@ const createSuperAdmin = async () =>{
                 country:"Republica Dominicana",
                 phone:"555-555-555",
                 zip:"11003",
-                password:"admin123"
+                password:EncryptedPassword
               }
           );
     } catch (error) {
@@ -52,6 +56,8 @@ const createSuperAdmin = async () =>{
 
 const createCommerce = async()=>{
     try {
+        const EncryptedPassword = await Encryption.encrypt("pruebaComercio");
+
         await commerce.create(
             {
             name: 'MacDonalds',
@@ -60,7 +66,7 @@ const createCommerce = async()=>{
             email:"comercio1@gmail.com",
             country:"Republica Dominicana",
             phone:"8095849087",
-            password:"pruebaComercio",
+            password:EncryptedPassword,
             zip:"01002"
             }
         );

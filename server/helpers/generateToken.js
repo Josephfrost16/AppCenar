@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 
 exports.SignToken = (user,secret,rol) =>{
@@ -7,7 +6,7 @@ exports.SignToken = (user,secret,rol) =>{
         username: user.name,
         email: user.email,
         role: rol,
-        iat: new Date().getTime(),
-        exp: new Date().getTime() + 60 *1000 
+        HoraCreacion: new Date().getTime(),
+        exp: new Date().getTime() + 60 *5000  // 5 minutos
     }, secret);
 }
