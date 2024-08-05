@@ -1,4 +1,4 @@
-const Commerce = require('../../models/Commerce/commerce');
+const CommerceType = require('../../models/Commerce/commerceType');
 
 exports.getAll = async (req,res) =>{
     try {

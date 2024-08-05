@@ -25,18 +25,17 @@ exports.getToken = async (req,res)=>{
         return res.status(404).json({'error':'User not found'});
     }
 
-    // Verificar contraseña:
-    const match = await Encryption.Compare(password, user.password) || Encryption.Compare(password, commerce.password);
-
-    if(!match){
-        return res.status(401).json({'error':'Incorrect password'});
-    }
-
     if (user){
         if (user.accountType== 1){
             rol = 'Admin'
         }else{
             rol = 'User'
+        }
+        // Verificar contraseña:
+        const match = await Encryption.Compare(password, user.password);
+
+        if(!match){
+            return res.status(401).json({'error':'Incorrect password'});
         }
 
         const token = jwt.sign({
@@ -50,6 +49,11 @@ exports.getToken = async (req,res)=>{
     
     if(commerce){
         rol = 'Commerce'
+
+        const match = Encryption.Compare(password, commerce.password);
+        if(!match){
+            return res.status(401).json({'error':'Incorrect password'});
+        }
 
         const token = jwt.sign({
             sub: commerce.id,
