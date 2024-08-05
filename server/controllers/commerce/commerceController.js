@@ -24,15 +24,17 @@ exports.getById = async (req,res) =>{
 
 exports.create = async (req,res) =>{
     try {
-        const {name,commerceTypeId,logo,email,country,phone,zip,state} = req.body
-        const commerce = await Commerce.create({name:name,
+        const {name,commerceTypeId,logo,email,country,phone,zip,password} = req.body
+        const commerce = await Commerce.create({
+            name:name,
             commerceTypeId:commerceTypeId,
             logo:logo,
             email:email,
             country:country,
             phone:phone,
             zip:zip,
-            state:state});
+            password:password
+            });
         res.status(200).json(commerce);
     } catch (error) {
         res.status(500).json({'error':error});

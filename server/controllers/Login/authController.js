@@ -1,6 +1,6 @@
 const User = require('../../models/User/user');
+const Commerce = require('../../models/Commerce/commerce');
 
-// const bcrypt = require('bcrypt');
 
 const Encryption = require('../../helpers/Encryption');
 
@@ -12,29 +12,84 @@ const secret = process.env.secret;
 exports.getToken = async (req,res)=>{
 
     try{
-     // Obtener usuario especifico:
+
+    // Obtener usuario especifico:
     const { email, password } = req.body;
     let rol = '';
 
     const user = await User.findOne({where:{email}});
-    if(!user){
+    const commerce = await Commerce.findOne({where:{email}});
+
+
+    if(!user && !commerce){
+        return res.status(404).json({'error':'User not found'});
+    }
+
+    if (user){
+        if (user.accountType== 1){
+            rol = 'Admin'
+        }else{
+            rol = 'User'
+        }
+        // Verificar contraseña:
+        const match = await Encryption.Compare(password, user.password);
+
+        if(!match){
+            return res.status(401).json({'error':'Incorrect password'});
+        }
+
+        const token = jwt.sign({
+            sub: user.id,
+            role: rol,
+            email,
+            exp: Date.now() + 60 *1000,
+        },secret)
+        res.send({"token": token});
+    }
+    
+    if(commerce){
+        rol = 'Commerce'
+
+        const match = Encryption.Compare(password, commerce.password);
+        if(!match){
+            return res.status(401).json({'error':'Incorrect password'});
+        }
+
+        const token = jwt.sign({
+            sub: commerce.id,
+            role: rol,
+            email,
+            exp: Date.now() + 60 *1000,
+        },secret)
+        res.send({"token": token});
+
+    }
+
+    }catch(err){
+        console.error('getToken error', err);
+    }
+};
+
+exports.getCommerceToken = async (req,res)=>{
+
+    try{
+     // Obtener usuario especifico:
+    const { email, password } = req.body;
+    let rol = 'Commerce';
+
+    const commerce = await Commerce.findOne({where:{email}});
+    if(!commerce){
         return res.status(404).json({'error':'User not found'});
     }
 
     // Verificar contraseña:
-    const match = await Encryption.Compare(password, user.password);
+    const match = await Encryption.Compare(password, commerce.password);
     if(!match){
         return res.status(401).json({'error':'Incorrect password'});
     }
 
-    if (user.accountType== 1){
-        rol = 'Admin'
-    }else{
-        rol = 'User'
-    }
-
     const token = jwt.sign({
-        sub: user.id,
+        sub: commerce.id,
         role: rol,
         email,
         exp: Date.now() + 60 *1000,
