@@ -74,18 +74,20 @@ function add(){
             console.log('Hubo un error en el fectch ',err)
         })
 
-    }else{
+    }else if (accountType.value === '4'){
+
             const data = {
                 name: CommerceName.value,
-                commerceType: CommerceType.value,
-                photo: CommerceLogo.value,
+                commerceTypeId: CommerceType.value,
+                logo: CommerceLogo.value,
                 email: email.value,
                 country: country.value,
                 phone: Phone.value,
                 zip: zip.value,
                 password: Password.value,
             }
-    
+            console.log('Datos enviados:', data);
+
             const config = {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
