@@ -47,7 +47,7 @@ const commerce = sequelize.define('commerce',{
             model: category,
             key: 'id'
         },
-        allowNull: false
+        allowNull: true
     },
     password:{
         type:DataTypes.STRING,
