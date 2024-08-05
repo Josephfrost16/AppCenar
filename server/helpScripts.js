@@ -19,9 +19,11 @@ const createUserTypes = async () =>{
 const createCommerceTypes = async () =>{
     try {
         await commerceType.bulkCreate([
-            { type: 'Restaurante' },
-            { type: 'Farmacia' },
-            {type:  'Mercado'}
+            {type: 'Restaurante', icon:'https://png.pngtree.com/png-clipart/20230928/original/pngtree-burger-png-images-png-image_13164941.png' },
+            {type: 'Farmacia', icon: 'https://png.pngtree.com/png-clipart/20230703/original/pngtree-3d-first-aid-box-without-background-png-image_9248019.png' },
+            {type: 'Tiendas', icon: 'https://static.vecteezy.com/system/resources/thumbnails/017/208/089/small/white-paper-shopping-bag-isolated-with-clipping-path-for-mockup-png.png'},
+            {type: 'Bebidas', icon: 'https://png.pngtree.com/png-clipart/20240118/original/pngtree-enjoy-drinks-png-image_14131182.png'},
+            {type: 'Nercado', icon: 'https://png.pngtree.com/png-vector/20240515/ourmid/pngtree-grocery-basket-with-vegetables-shopping-in-the-store-png-image_12468689.png'}
           ]);
     } catch (error) {
         console.error('Error seeding ecommerce data:', error);
@@ -66,6 +68,8 @@ const createCommerce = async()=>{
         console.error('Error seeding User data:', error);
     }
 }
+
+
 
 module.exports = {
     createUserTypes,

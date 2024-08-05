@@ -36,12 +36,24 @@ const userRoutes = require('./routes/Login/userRoutes');
 const commerceRoutes = require('./routes/commerce/commerceRoutes');
 const commerceType = require('./routes/commerce/commerceType');
 const authenticationRoutes = require('./routes/Login/authRoute');
+const orders_details_routes = require('./routes/orders/orders_details_router');
+const orders_routes = require('./routes/orders/orders_routes');
+const directions_routes = require('./routes/other/directions_routes');
+const favorites_routes = require('./routes/other/favorites_routes');
+const product_category_routes = require('./routes/products/product_category_routes');
+const product_routes = require('./routes/products/product_routes');
 
 // Creando los endPoints
 app.use('/api/user',userRoutes);
 app.use('/api/commerce', commerceRoutes);
 app.use('/api/commerceType', commerceType);
 app.use('/api/auth',authenticationRoutes);
+app.use('/api/orders_details',orders_details_routes);
+app.use('/api/orders', orders_routes);
+app.use('/api/directions',directions_routes);
+app.use('/api/favorites',favorites_routes);
+app.use('/api/product_category', product_category_routes);
+app.use('/api/product_routes', product_routes);
 
 //  Sincronizando Sequelize
 sequelize.sync({force:true})
