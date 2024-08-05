@@ -24,19 +24,20 @@ const products = sequelize.define('products', {
     price:{
         type: DataTypes.DECIMAL(10,2),
         allowNull: false
-    },
-    category_id:{
-        type:DataTypes.INTEGER,
-        references: {
-            model: category,
-            key: 'id'
-        }
     }
+    // category_id:{
+    //     type:DataTypes.INTEGER,
+    //     references: {
+    //         model: category,
+    //         key: 'id'
+    //     }
+    // }
 })
 
-category.hasMany(products, {foreignKey: 'category_id'});
 
-products.belongsTo(category, {foreignKey: 'category_id'});
+// category.hasMany(products, {foreignKey: 'category_id'});
+
+// products.belongsTo(category, {foreignKey: 'category_id'});
 
 module.exports = products;
 
