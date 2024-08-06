@@ -41,17 +41,17 @@
                 <button class="btn next" id="nextType"> Siguiente </button>
             </div>
 
-            <div class="contact flex none">
-                <form enctype="multipart/form-data" method="POST" class="" action="http://localhost:4090/">
-                    <p>Nombre<span>*</span></p>
-                    <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
-                    <p>Apellido (opcional)</p>
-                    <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
-                    <p>Sube una foto</p>
-                    <input class="capitalize" type="file" id="photo" name="photo" placeholder="Escribe tu apellido">
-                </form>
-                <button class="btn next" id="nextContact"> Siguiente </button>
-            </div>
+                <div class="contact flex none">
+                    <form enctype="multipart/form-data" method="POST" class="" action="/upload-photo" id="pi-data">
+                        <p>Nombre<span>*</span></p>
+                        <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
+                        <p>Apellido (opcional)</p>
+                        <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
+                        <p>Sube una foto</p>
+                        <input class="capitalize" type="file" id="photo" name="photo" accept="image/png, image/jpeg">
+                    </form>
+                    <button class="btn next" id="nextContact" type="submit"> Siguiente </button>
+                </div>
 
             <div class="commerce flex none">
                 <form  enctype="multipart/form-data" class="" action="">
