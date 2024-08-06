@@ -109,7 +109,9 @@
 .content{
     display: flex;
     gap: 1rem;
-    
+    scroll-behavior: smooth;
+    overflow: hidden;
+
 }
 
 .titleSector{
@@ -123,7 +125,6 @@
    gap: 1rem;
    padding: 1rem 0rem 0rem 1rem;
    background-color: #fadc63;
-   overflow: hidden;
    border-radius: 0.5rem;
    border: solid 2px transparent;
    transition: 0.1s;
@@ -131,6 +132,7 @@
    flex-shrink: 0;
    min-width: 230px;
    max-width: 230px;
+  
 }
 
 .cardType:hover{
@@ -153,7 +155,6 @@
     flex-direction: column;
     padding: 0rem 2rem 2rem 2rem;
     gap:2rem;
-    overflow: hidden;
     align-items: stretch;
     max-width: 1393px;
 }
@@ -197,7 +198,6 @@
     gap:2rem;
     align-items: stretch;
     padding: 0rem 2rem 2rem 2rem;
-    overflow: hidden;
     max-width: 1393px;
 }
 

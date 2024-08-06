@@ -1,7 +1,21 @@
+import {scrollLeft, scrollRight} from '../AlternativeMethods.js';
+const left = document.querySelector('.left');
+const right = document.querySelector('.right');
+
 document.addEventListener('DOMContentLoaded', ()=>{
     getCommerceCategory();
+    addScrollEvents();
 })
 
+function addScrollEvents(){
+    left.addEventListener('click', ()=>{
+        scrollLeft();
+    });
+
+    right.addEventListener('click', ()=>{
+        scrollRight();
+    })
+}
 
 function getCommerceCategory(){
     fetch('http://localhost:4090/api/commerceType').then(response => {
@@ -26,3 +40,6 @@ function getCommerceCategory(){
         console.error('get error', err)
     })
 }
+
+
+  
