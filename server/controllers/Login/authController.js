@@ -4,10 +4,10 @@ const Commerce = require('../../models/Commerce/commerce');
 
 const Encryption = require('../../helpers/Encryption');
 
-const jwt = require('jsonwebtoken');
-
 // Clave maestra :
 const secret = process.env.secret;
+
+const TokenConfig = require('../../helpers/generateToken');
 
 exports.getToken = async (req,res)=>{
 
@@ -26,7 +26,7 @@ exports.getToken = async (req,res)=>{
     }
 
     if (user){
-        if (user.accountType== 1){
+        if (user.accountType === '1'){
             rol = 'Admin'
         }else{
             rol = 'User'
@@ -38,13 +38,9 @@ exports.getToken = async (req,res)=>{
             return res.status(401).json({'error':'Incorrect password'});
         }
 
-        const token = jwt.sign({
-            sub: user.id,
-            role: rol,
-            email,
-            exp: Date.now() + 60 *1000,
-        },secret)
+        const token =  TokenConfig.SignToken(user,rol,secret);
         res.send({"token": token});
+
     }
     
     if(commerce){
@@ -55,14 +51,8 @@ exports.getToken = async (req,res)=>{
             return res.status(401).json({'error':'Incorrect password'});
         }
 
-        const token = jwt.sign({
-            sub: commerce.id,
-            role: rol,
-            email,
-            exp: Date.now() + 60 *1000,
-        },secret)
+        const token = TokenConfig.SignToken(commerce,rol,secret);
         res.send({"token": token});
-
     }
 
     }catch(err){

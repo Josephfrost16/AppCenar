@@ -4,6 +4,8 @@ const commerceType = require('./models/Commerce/commerceType');
 const user = require('./models/User/user');
 const commerce = require('./models/Commerce/commerce')
 
+const Encryption = require('./helpers/Encryption');
+
 const createUserTypes = async () =>{
     try {
         await UserType.bulkCreate([
@@ -33,6 +35,8 @@ const createCommerceTypes = async () =>{
 
 const createSuperAdmin = async () =>{
     try {
+        const EncryptedPassword = await Encryption.encrypt("admin123");
+
         await user.create(
             {
                 name:"Admin",
@@ -43,7 +47,7 @@ const createSuperAdmin = async () =>{
                 country:"Republica Dominicana",
                 phone:"555-555-555",
                 zip:"11003",
-                password:"admin123"
+                password:EncryptedPassword
               }
           );
     } catch (error) {
@@ -53,6 +57,8 @@ const createSuperAdmin = async () =>{
 
 const createCommerce = async()=>{
     try {
+        const EncryptedPassword = await Encryption.encrypt("pruebaComercio");
+
         await commerce.bulkCreate([
             {
                 name: 'MacDonalds',
@@ -61,7 +67,7 @@ const createCommerce = async()=>{
                 email:"comercio1@gmail.com",
                 country:"Republica Dominicana",
                 phone:"8095849087",
-                password:"pruebaComercio",
+                password:EncryptedPassword,
                 zip:"01002",
                 banner:"https://www.thedailymeal.com/img/gallery/the-reason-mcdonalds-burgers-dont-rot-is-actually-really-simple/l-intro-1681761791.jpg"
             },
@@ -72,7 +78,7 @@ const createCommerce = async()=>{
                 email:"comercio2@gmail.com",
                 country:"Republica Dominicana",
                 phone:"8095849089",
-                password:"pruebaComercio",
+                password:EncryptedPassword,
                 zip:"01002",
                 banner:"https://www.downtowncenter.com.do/wp-content/uploads/2016/12/carrefour04.jpg"
             },
@@ -83,7 +89,7 @@ const createCommerce = async()=>{
                 email:"comercio3@gmail.com",
                 country:"Republica Dominicana",
                 phone:"8095849289",
-                password:"pruebaComercio",
+                password:EncryptedPassword,
                 zip:"01002",
                 banner:"https://okdiario.com/img/2023/10/29/aprovecha-al-maximo-el-dia-internacional-del-cafe-en-starbucks-descubre-como-conseguir-un-bebida-gratis.jpg"
             },
@@ -94,7 +100,7 @@ const createCommerce = async()=>{
                 email:"comercio4@gmail.com",
                 country:"Republica Dominicana",
                 phone:"8095849249",
-                password:"pruebaComercio",
+                password:EncryptedPassword,
                 zip:"01002",
                 banner:"https://eldiariony.com/wp-content/uploads/sites/2/2021/09/Krispy-Kreme.jpg?w=4096" 
             },
@@ -105,7 +111,7 @@ const createCommerce = async()=>{
                 email:"comercio5@gmail.com",
                 country:"Republica Dominicana",
                 phone:"8095842249",
-                password:"pruebaComercio",
+                password:EncryptedPassword,
                 zip:"01002",
                 banner:"https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" 
             }
