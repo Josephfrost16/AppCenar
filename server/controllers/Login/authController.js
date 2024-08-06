@@ -12,7 +12,6 @@ const TokenConfig = require('../../helpers/generateToken');
 exports.getToken = async (req,res)=>{
 
     try{
-
     // Obtener usuario especifico:
     const { email, password } = req.body;
     let rol = '';
@@ -37,8 +36,11 @@ exports.getToken = async (req,res)=>{
         if(!match){
             return res.status(401).json({'error':'Incorrect password'});
         }
-
+        req.session.message= 'klk';
+        
         const token =  TokenConfig.SignToken(user,rol,secret);
+        console.log(req.session);
+
         res.send({"token": token});
 
     }
@@ -52,6 +54,7 @@ exports.getToken = async (req,res)=>{
         }
 
         const token = TokenConfig.SignToken(commerce,rol,secret);
+
         res.send({"token": token});
     }
 

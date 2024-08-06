@@ -2,7 +2,8 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts")
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts");
+const session = require('express-session');
 
 // Creando las variables intermediarias
 const app = express();
@@ -11,6 +12,14 @@ const PORT = 4090;
 // Gestionando middlewares
 app.use(express.json());
 app.use(cors());
+
+app.use(session({
+    secret: process.env.secret,
+    resave: false,
+    saveUninitialized: false
+}))
+
+// const Authentication = require('./helpers/generateToken');
 
 
 // Importando los modelos
@@ -66,7 +75,6 @@ sequelize.sync({force:true})
     createCommerceTypes();
     createSuperAdmin();
     createCommerce();
-    
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)
     });

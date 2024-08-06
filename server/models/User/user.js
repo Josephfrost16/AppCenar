@@ -58,8 +58,15 @@ const User = sequelize.define('User',{
         type: DataTypes.INTEGER,
         defaultValue:null,
         allowNull:true
+    },
+    resetToken:{
+        type: DataTypes.STRING,
+        allowNull: true  
+    },
+    resetTokenExpiration:{
+        type: DataTypes.DATE,
+        allowNull: true
     }
-
 });
 
 userType.hasMany(User, {foreignKey: 'accountType'});
