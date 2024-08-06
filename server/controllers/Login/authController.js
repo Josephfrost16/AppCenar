@@ -9,7 +9,7 @@ const secret = process.env.secret;
 
 const TokenConfig = require('../../helpers/generateToken');
 
-exports.getToken = async (req,res)=>{
+exports.generateToken = async (req,res)=>{
 
     try{
     // Obtener usuario especifico:
@@ -21,90 +21,91 @@ exports.getToken = async (req,res)=>{
 
 
     if(!user && !commerce){
-        return res.status(404).json({'error':'User not found'});
+       return res.status(404).json({'error':'User not found'});
     }
 
     if (user){
-        if (user.accountType === '1'){
+        if (user.accountType === 1){
             rol = 'Admin'
+        }else if(user.accountType === 2){
+            rol = 'Cliente'
         }else{
-            rol = 'User'
+            rol = 'Repartidor'
         }
         // Verificar contraseña:
         const match = await Encryption.Compare(password, user.password);
 
         if(!match){
-            return res.status(401).json({'error':'Incorrect password'});
+           return res.status(401).json({'error':'Incorrect password'});
         }
-        req.session.message= 'klk';
-        
-        const token =  TokenConfig.SignToken(user,rol,secret);
-        console.log(req.session);
 
-        res.send({"token": token});
+        const token =  TokenConfig.SignToken({user:user.toJSON(),rol}, secret);
+        return res.status(200).send({"token": token});
 
     }
-    
-    if(commerce){
+    else {
         rol = 'Commerce'
 
         const match = Encryption.Compare(password, commerce.password);
         if(!match){
-            return res.status(401).json({'error':'Incorrect password'});
+           return  res.status(401).json({'error':'Incorrect password'});
         }
 
-        const token = TokenConfig.SignToken(commerce,rol,secret);
-
-        res.send({"token": token});
+        const token = TokenConfig.SignToken({commerce:commerce.toJSON(),rol},secret);
+        return res.status(200).send({"token": token});
     }
 
     }catch(err){
         console.error('getToken error', err);
+        res.status(500).json({ 'error': 'Internal server error' });
     }
 };
 
-exports.getCommerceToken = async (req,res)=>{
 
-    try{
-     // Obtener usuario especifico:
-    const { email, password } = req.body;
-    let rol = 'Commerce';
 
-    const commerce = await Commerce.findOne({where:{email}});
-    if(!commerce){
-        return res.status(404).json({'error':'User not found'});
-    }
 
-    // Verificar contraseña:
-    const match = await Encryption.Compare(password, commerce.password);
-    if(!match){
-        return res.status(401).json({'error':'Incorrect password'});
-    }
+// exports.getCommerceToken = async (req,res)=>{
 
-    const token = jwt.sign({
-        sub: commerce.id,
-        role: rol,
-        email,
-        exp: Date.now() + 60 *1000,
-    },secret)
-    res.send({"token": token});
+//     try{
+//      // Obtener usuario especifico:
+//     const { email, password } = req.body;
+//     let rol = 'Commerce';
 
-    }catch(err){
-        console.error('getToken error', err);
-    }
-};
+//     const commerce = await Commerce.findOne({where:{email}});
+//     if(!commerce){
+//         return res.status(404).json({'error':'User not found'});
+//     }
 
-exports.getByEmail = async (req,res) =>{
-    try {
-        const {id} = req.params;
-        const user = await User.findOne({where:{id:id}});
-        res.status(200).json(user);
+//     // Verificar contraseña:
+//     const match = await Encryption.Compare(password, commerce.password);
+//     if(!match){
+//         return res.status(401).json({'error':'Incorrect password'});
+//     }
 
-    } catch (error) {
-        console.error('get error', error)
-        res.status(500).json({'error':error});
-    }
-}
+//     const token = jwt.sign({
+//         sub: commerce.id,
+//         role: rol,
+//         email,
+//         exp: Date.now() + 60 *1000,
+//     },secret)
+//     res.send({"token": token});
+
+//     }catch(err){
+//         console.error('getToken error', err);
+//     }
+// };
+
+// exports.getByEmail = async (req,res) =>{
+//     try {
+//         const {id} = req.params;
+//         const user = await User.findOne({where:{id:id}});
+//         res.status(200).json(user);
+
+//     } catch (error) {
+//         console.error('get error', error)
+//         res.status(500).json({'error':error});
+//     }
+// }
 
 
 

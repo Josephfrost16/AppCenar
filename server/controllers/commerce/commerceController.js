@@ -21,13 +21,27 @@ exports.getById = async (req,res) =>{
     }
 }
 
+exports.getByType = async (req,res) =>{
+    try {
+         const {id} = req.params
+         const commerce = await Commerce.findAll({where:{commerceTypeId:id}})
+         res.status(200).json(commerce);
+
+    } catch (error) {
+        res.status(500).json({'error':error});
+    }
+}
+
+
+
 exports.create = async (req,res) =>{
     try {
-        const {name,commerceTypeId,logo,email,country,phone,zip,password} = req.body
+        const {name,commerceTypeId,logo,banner,email,country,phone,zip,password} = req.body
         const commerce = await Commerce.create({
             name:name,
             commerceTypeId:commerceTypeId,
             logo:logo,
+            banner:banner,
             email:email,
             country:country,
             phone:phone,
