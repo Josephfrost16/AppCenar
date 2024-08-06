@@ -2,6 +2,7 @@ const sequelize = require('./database/conexion');
 const UserType = require('./models/User/userType');
 const commerceType = require('./models/Commerce/commerceType');
 const user = require('./models/User/user');
+const commerce = require('./models/Commerce/commerce')
 
 const createUserTypes = async () =>{
     try {
@@ -47,9 +48,28 @@ const createSuperAdmin = async () =>{
     }
 }
 
+const createCommerce = async()=>{
+    try {
+        await commerce.create(
+            {
+            name: 'MacDonalds',
+            commerceTypeId: 1,
+            logo:"https://media.designrush.com/inspiration_images/134933/conversions/_1511456189_555_McDonald's-preview.jpg",
+            email:"comercio1@gmail.com",
+            country:"Republica Dominicana",
+            phone:"8095849087",
+            password:"pruebaComercio",
+            zip:"01002"
+            }
+        );
+    } catch (error) {
+        console.error('Error seeding User data:', error);
+    }
+}
 
 module.exports = {
     createUserTypes,
     createCommerceTypes,
-    createSuperAdmin 
+    createSuperAdmin,
+    createCommerce
 }

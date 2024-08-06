@@ -28,33 +28,33 @@
         <div class="main">
 
             <div class="type flex">
-                <form class="" action="">
+                <form  enctype="multipart/form-data" class="" action="">
                     <p>Correo Electronico<span>*</span></p>
                     <input class="" type="text" id="email" placeholder="Example@gmail.com">
                     <p>¿Que deseas ser?</p>
                     <select name="accountType" id="accountType" title="accountType">
-                        <option value="cliente">Cliente</option>
-                        <option value="comercio">Comercio</option>
-                        <option value="delivery">Repartidor</option>
+                        <option value="2">Cliente</option>
+                        <option value="4">Comercio</option>
+                        <option value="3">Repartidor</option>
                     </select>
                 </form>
                 <button class="btn next" id="nextType"> Siguiente </button>
             </div>
 
             <div class="contact flex none">
-                <form class="" action="">
+                <form enctype="multipart/form-data" method="POST" class="" action="http://localhost:4090/">
                     <p>Nombre<span>*</span></p>
                     <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
                     <p>Apellido (opcional)</p>
                     <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
                     <p>Sube una foto</p>
-                    <input class="capitalize" type="file" id="commerceLogo" placeholder="Escribe tu apellido">
+                    <input class="capitalize" type="file" id="photo" name="photo" placeholder="Escribe tu apellido">
                 </form>
                 <button class="btn next" id="nextContact"> Siguiente </button>
             </div>
 
             <div class="commerce flex none">
-                <form class="" action="">
+                <form  enctype="multipart/form-data" class="" action="">
                     <p>Nombre de tu negocio<span>*</span></p>
                     <input class="capitalize" type="text" id="commerceName" placeholder="Escribe tu nombre...">
                     <p>¿De que es tu negocio?</p>
@@ -68,7 +68,7 @@
             </div>
 
             <div class="phone flex none">
-                <form class="" action="">
+                <form  enctype="multipart/form-data" class="" action="">
                     <p>Pais</p>
                     <select name="country" id="country" title="Pais">
                         <option value="">Republica Dominicana</option>
@@ -82,7 +82,7 @@
             </div>
 
             <div class="password flex none">
-                <form class="" action="">
+                <form enctype="multipart/form-data" class="" action="">
                     <p>Contraseña<span>*</span></p>
                     <input class="" type="password" id="password" placeholder="***********">
                     <p>Confirmar Contraseña<span>*</span></p>

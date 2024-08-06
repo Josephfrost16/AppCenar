@@ -30,6 +30,7 @@ const User = sequelize.define('User',{
     },
     email:{
         type:DataTypes.STRING,
+        unique: true,
         allowNull:false
     },
     country:{
@@ -52,11 +53,11 @@ const User = sequelize.define('User',{
         type:DataTypes.INTEGER,
         defaultValue: 0
     },
-
     // Check this out:
     delivery_state:{
         type: DataTypes.INTEGER,
-        defaultValue: null
+        defaultValue:null,
+        allowNull:true
     }
 
 });

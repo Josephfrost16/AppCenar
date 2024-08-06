@@ -1,3 +1,5 @@
+// const commerceType = require("../../server/models/Commerce/commerceType");
+
 const contact = document.querySelector(".contact");
 const phone = document.querySelector(".phone");
 const password = document.querySelector('.password');
@@ -18,14 +20,97 @@ const line1 = document.getElementById('line1');
 const line2 = document.getElementById('line2');
 const line3 = document.getElementById('line3');
 
-const accountType = document.getElementById('accountType')
+// variables a utilizar respecto al Post del form users:
+const FirstName = document.getElementById('firstName');
+const email = document.getElementById('email');
+const LastName = document.getElementById('lastName');
+const accountType = document.getElementById('accountType');
+const photo = document.getElementById('photo');
+const country = document.getElementById('country');
+const Phone = document.getElementById('phone');
+const zip = document.getElementById('postalCode');
+const Password = document.getElementById('password');
+
+// Variables de comercio:
+const CommerceName = document.getElementById('commerceName');
+const CommerceType = document.getElementById('commerce');
+const CommerceLogo = document.getElementById('commerceLogo');
 
 
+function add(){
+    
+    if (accountType.value === '2' || accountType.value === '3'){
 
+        const data = {
+            name: FirstName.value,
+            lastName: LastName.value,
+            accountType: accountType.value,
+            photo: photo.files[0].name,
+            email: email.value,
+            country: country.value,
+            phone: Phone.value,
+            zip: zip.value,
+            password: Password.value,
+
+        }
+
+        const config = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }
+    
+        fetch('http://localhost:4090/api/user/',config).then(response=>{
+            if(!response.ok){
+                throw new Error('Error al crear el usuario')
+            }
+            return response.json();
+        })
+        .then(data=>{
+            
+            console.log('usuario creado correctamente', data);
+    
+        }).catch(err=>{
+            console.log('Hubo un error en el fectch ',err)
+        })
+
+    }else{
+            const data = {
+                name: CommerceName.value,
+                commerceType: CommerceType.value,
+                photo: CommerceLogo.value,
+                email: email.value,
+                country: country.value,
+                phone: Phone.value,
+                zip: zip.value,
+                password: Password.value,
+            }
+    
+            const config = {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            }
+        
+            fetch('http://localhost:4090/api/commerce/',config).then(response=>{
+                if(!response.ok){
+                    throw new Error('Error al crear el comercio')
+                }
+                return response.json();
+            })
+            .then(data=>{
+                
+                console.log('comercio creado correctamente', data);
+        
+            }).catch(err=>{
+                console.log('Hubo un error en el fectch ',err)
+            })
+        }
+    }
 nextType.addEventListener('click', function(){
     changeColorYellow(line1,step2)
 
-    if (accountType.value == 'cliente' || accountType.value == "delivery") {
+    if (accountType.value == '2' || accountType.value == "3") {
         divOff('type',type);
         divOn('contact',contact);
     }else{
@@ -59,8 +144,6 @@ nextPhone.addEventListener('click', function(){
     divOn('password',password);
 })
 
-
-
 step1.addEventListener('click', function(){
     RemoveColorYellow(line3,step4);
     RemoveColorYellow(line2,step3);
@@ -74,9 +157,6 @@ step1.addEventListener('click', function(){
     step2.removeEventListener('click',step2F);
     step3.removeEventListener('click',step3F);
 });
-
-
-
 
 
 function changeColorYellow(line, step){
@@ -97,7 +177,6 @@ function divOn(name,div){
     div.className= `${name} flex`;
 }
 
-
 function step2F(){
     RemoveColorYellow(line3,step4);
     RemoveColorYellow(line2,step3);
@@ -116,3 +195,23 @@ function step3F(){
     divOn('phone',phone);
 }
 
+document.getElementById('nextContact').addEventListener('click', function (event) {
+    event.preventDefault();
+
+    const form = document.querySelector('form');
+    const formData = new FormData(form);
+
+    fetch('http://localhost:4090/', {
+        method: 'POST',
+        body: formData
+    }).then(response => {
+        if (!response.ok) {
+            throw new Error('Error al subir la imagen');
+        }
+        return response.json();
+    }).then(data => {
+        console.log('Imagen subida correctamente', data);
+    }).catch(err => {
+        console.error('Hubo un error en el fetch', err);
+    });
+});

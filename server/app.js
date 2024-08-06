@@ -2,7 +2,10 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin } = require("./helpScripts")
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts")
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
+const path = require("path");
 
 // Creando las variables intermediarias
 const app = express();
@@ -33,8 +36,8 @@ require('./models/Orders/orders_details');
 
 // Importando las rutas
 const userRoutes = require('./routes/Login/userRoutes');
-const commerceRoutes = require('./routes/Login/commerceRoutes');
-const commerceType = require('./routes/Login/commerceType');
+const commerceRoutes = require('./routes/commerce/commerceRoutes');
+const commerceType = require('./routes/commerce/commerceType');
 const authenticationRoutes = require('./routes/Login/authRoute');
 
 // Creando los endPoints
@@ -43,7 +46,28 @@ app.use('/api/commerce', commerceRoutes);
 app.use('/api/commerceType', commerceType);
 app.use('/api/auth',authenticationRoutes);
 
-//  Sincronizando Sequelize
+//Confg Multer
+// const imgStorage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "images");
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${uuidv4()}-${file.originalname}`);
+//   },
+// });
+
+// app.use(multer({ storage: imgStorage }).single("Image"));
+// app.use("/images", express.static(path.join(__dirname, "images")));
+
+const upload = multer({dest: 'uploads/'})
+app.use(express.static('client')) 
+app.post('/', upload.single('photo'), function (req, res, next) {
+  console.log(req.file);
+  console.log(req.body);
+  res.json({file:req.file, body:req.body})
+})
+
+//  Sincronizando Sequelize 
 sequelize.sync({force:true})
 .then(()=>{
     console.log('Database Connection was successfully'); 
@@ -53,6 +77,7 @@ sequelize.sync({force:true})
     createUserTypes();
     createCommerceTypes();
     createSuperAdmin();
+    createCommerce();
     
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)
