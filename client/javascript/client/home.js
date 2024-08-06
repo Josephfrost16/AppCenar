@@ -1,6 +1,12 @@
 import {scrollLeft, scrollRight} from '../AlternativeMethods.js';
-const left = document.querySelector('.left');
-const right = document.querySelector('.right');
+const left1 = document.getElementById('left1');
+const right1 = document.getElementById('right1');
+
+const left2 = document.getElementById('left2');
+const right2 = document.getElementById('right2');
+
+const left3 = document.getElementById('left3');
+const right3 = document.getElementById('right3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
     getCommerceCategory();
@@ -8,12 +14,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
 })
 
 function addScrollEvents(){
-    left.addEventListener('click', ()=>{
-        scrollLeft();
+    left1.addEventListener('click', ()=>{
+        scrollLeft('content1');
     });
 
-    right.addEventListener('click', ()=>{
-        scrollRight();
+    right1.addEventListener('click', ()=>{
+        scrollRight('content1');
+    })
+
+    left2.addEventListener('click', ()=>{
+        scrollLeft('content2');
+    });
+
+    right2.addEventListener('click', ()=>{
+        scrollRight('content2');
+    })
+
+    left3.addEventListener('click', ()=>{
+        scrollLeft('content3');
+    });
+
+    right3.addEventListener('click', ()=>{
+        scrollRight('content3');
     })
 }
 

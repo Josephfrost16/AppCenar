@@ -1,5 +1,5 @@
-export function scrollLeft() {
-    const carousel = document.querySelector('.content');
+export function scrollLeft(content) {
+    const carousel = document.getElementById(content);
     carousel.scrollBy({
       top: 0,
       left: -200,
@@ -7,8 +7,8 @@ export function scrollLeft() {
     });
   }
   
-export function scrollRight() {
-    const carousel = document.querySelector('.content');
+export function scrollRight(content) {
+    const carousel = document.getElementById(content);
     carousel.scrollBy({
       top: 0,
       left: 200,

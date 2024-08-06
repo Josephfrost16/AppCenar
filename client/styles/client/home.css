@@ -109,9 +109,8 @@
 .content{
     display: flex;
     gap: 1rem;
-    scroll-behavior: smooth;
+    scroll-behavior:smooth;
     overflow: hidden;
-
 }
 
 .titleSector{
