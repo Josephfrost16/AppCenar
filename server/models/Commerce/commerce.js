@@ -22,8 +22,14 @@ const commerce = sequelize.define('commerce',{
     },
     logo:{
         type:DataTypes.STRING,
-        allowNull:true
+        allowNull:true,
+        defaultValue:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
     },
+    banner:{
+        type:DataTypes.TEXT,
+        allowNull:true
+    }
+    ,
     email:{
         type:DataTypes.STRING,
         allowNull:false,

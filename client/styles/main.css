@@ -9,6 +9,12 @@
    
 }
 
+html{
+    transform: scale(1);
+    transform-origin:0%;
+}
+
+
 .logo{
     margin-right: 3rem;
     margin-bottom: 3rem;
@@ -87,3 +93,6 @@
     transition: 0.1s;
     user-select: none; 
 }
+
+
+/* Media Query para pantallas pequeñas (ej. móviles) */

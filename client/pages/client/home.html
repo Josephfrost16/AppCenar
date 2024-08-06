@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="../../styles/main.css">
     <link rel="stylesheet" href="../../styles/client/home.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
-    
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
     <link rel="icon" href="../../src/onlywing.png">
     <title>Inicio</title>
 </head>
@@ -20,15 +20,14 @@
         </div>
         <div class="encap">
             <div class="search">
-                <input type="text" name="" id="" class="searchI" placeholder="Encuentra un local">
-                <div class="searchIcon">
+                <input type="text" value="" id="localeFilter" class="searchI" placeholder="Encuentra un local">
+                <div class="searchIcon" id="searchIcon">
                     <span class="material-symbols-outlined">search</span>
                 </div>
             </div>
         </div>
         <div class="profile">
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt="">
-            <label for="" class="nameProfile">Jean Carlos Mendoza</label>
+
         </div>
     </div>
 
@@ -42,41 +41,14 @@
                 <div class="headerCont">
                     <label for="" class="titleSector">Hola. ¿Que te apetece pedir?</label>
                     <div class="sliderBtn">
-                        <div><span class="material-symbols-outlined slider">arrow_back</span></div>
-                        <div><span class="material-symbols-outlined slider">arrow_forward</span></div>
+                        <div id="left1"><span class="material-symbols-outlined slider">arrow_back</span></div>
+                        <div id="right1"><span class="material-symbols-outlined slider">arrow_forward</span></div>
                     </div>
                 </div>
     
     
-                <div class="content">
-                    <div class="cardType" style="background-color:none;">
-                        <label for="" class="typeTitle" style="color:none;">Restaurantes</label>
-                        <img src="https://png.pngtree.com/png-clipart/20230928/original/pngtree-burger-png-images-png-image_13164941.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color:#9FE0EF;">
-                        <label for="" class="typeTitle" style="color:none;">Mercados</label>
-                        <img src="https://png.pngtree.com/png-vector/20240515/ourmid/pngtree-grocery-basket-with-vegetables-shopping-in-the-store-png-image_12468689.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color:#A8B5E0;">
-                        <label for="" class="typeTitle" style="color:none;">Bebidas</label>
-                        <img src="https://png.pngtree.com/png-clipart/20240118/original/pngtree-enjoy-drinks-png-image_14131182.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color:#F3F2F4;">
-                        <label for="" class="typeTitle" style="color:none;">Tiendas</label>
-                        <img src="https://static.vecteezy.com/system/resources/thumbnails/017/208/089/small/white-paper-shopping-bag-isolated-with-clipping-path-for-mockup-png.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color: #C8102E;">
-                        <label for="" class="typeTitle" style="color:#FFF;">Farmacias</label>
-                        <img src="https://png.pngtree.com/png-clipart/20230703/original/pngtree-3d-first-aid-box-without-background-png-image_9248019.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color: #C8102E;">
-                        <label for="" class="typeTitle" style="color:#FFF;">Farmacias</label>
-                        <img src="https://png.pngtree.com/png-clipart/20230703/original/pngtree-3d-first-aid-box-without-background-png-image_9248019.png" alt="">
-                    </div>
-                    <div class="cardType" style="background-color: #C8102E;">
-                        <label for="" class="typeTitle" style="color:#FFF;">Farmacias</label>
-                        <img src="https://png.pngtree.com/png-clipart/20230703/original/pngtree-3d-first-aid-box-without-background-png-image_9248019.png" alt="">
-                    </div>
+                <div class="content" id="content1">
+                    <!-- Aqui se cargan los tipos de comercio-->
                 </div>
             </div>
     
@@ -123,149 +95,63 @@
                 </div>
             </div>
     
-                <div class="commerces">
-                    <div class="headerCont">
-                        <label for="" class="titleSector">¡Descubre estas opciones!</label>
-                        <div class="sliderBtn">
-                            <div><span class="material-symbols-outlined slider">arrow_back</span></div>
-                            <div><span class="material-symbols-outlined slider">arrow_forward</span></div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-    
-    
+            <div class="commerces">
+                <div class="headerCont">
+                    <label for="" class="titleSector">¡Descubre estas opciones!</label>
+                    <div class="sliderBtn">
+                        <div id="left2"><span class="material-symbols-outlined slider">arrow_back</span></div>
+                        <div id="right2"><span class="material-symbols-outlined slider">arrow_forward</span></div>
                     </div>
                 </div>
-    
-                <div class="commerces">
-                    <div class="headerCont">
-                        <label for="" class="titleSector">Los mejores en comida rapida</label>
-                        <div class="sliderBtn">
-                            <div><span class="material-symbols-outlined slider">arrow_back</span></div>
-                            <div><span class="material-symbols-outlined slider">arrow_forward</span></div>
-                        </div>
-                    </div>
-                    <div class="content">
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                        <div class="cardCommerce">
-                            <img src="https://www.datocms-assets.com/24611/1701290808-homebanner_800x385_2n1pepham.png?auto=format" alt="">
-                            <div class="infoCommerce">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT-DxEDNqFR-BXKwPg0Xyxrmii8jL0NaH2Sg&s" alt="">
-                                <div class="data">
-                                    <div class="titleData">
-                                        <label for="" class="name">Little Caesar</label>
-                                        <span class="material-symbols-outlined">kid_star</span>
-                                        <label for="" class="calification">4.2</label>
-                                    </div>
-                                    <label for="" class="delivery">15-30 min • Envio $ 90</label>
-                                </div>    
-                            </div>
-                        </div>
-                    </div>
+                <div class="content" id="content2">
+                    <!--Aqui se cargan todos los comercios-->
+                </div>
             </div>
-    
-        </div>
-    
-        <div class="footer">
-    
-        </div>
+
+            <div class="commerces">
+                <div class="headerCont">
+                    <label for="" class="titleSector">Los mejores en comida rapida</label>
+                    <div class="sliderBtn">
+                        <div id="left3"><span class="material-symbols-outlined slider">arrow_back</span></div>
+                        <div id="right3"><span class="material-symbols-outlined slider">arrow_forward</span></div>
+                    </div>
+                </div>
+                <div class="content" id="content3">
+                    <!--Aqui se carga comida rapida-->  
+                </div>
+            </div>
+
+            <div class="commerces">
+                <div class="headerCont">
+                    <label for="" class="titleSector">¿Tienes sed? toma algo</label>
+                    <div class="sliderBtn">
+                        <div id="left4"><span class="material-symbols-outlined slider">arrow_back</span></div>
+                        <div id="right4"><span class="material-symbols-outlined slider">arrow_forward</span></div>
+                    </div>
+                </div>
+                <div class="content" id="content4">
+                    <!--Aqui se carga comida rapida-->  
+                </div>
+            </div>
+
+            <div class="commerces">
+                <div class="headerCont">
+                    <label for="" class="titleSector">Prueba estos deliciosos postres</label>
+                    <div class="sliderBtn">
+                        <div id="left5"><span class="material-symbols-outlined slider">arrow_back</span></div>
+                        <div id="right5"><span class="material-symbols-outlined slider">arrow_forward</span></div>
+                    </div>
+                </div>
+                <div class="content" id="content5">
+                    <!--Aqui se carga comida rapida-->  
+                </div>
+            </div>
     </div>
+
+    <div class="footer">
+    
+    </div>
+
+    <script type="module" src="../../javascript/client/home.js"></script>
 </body>
 </html>

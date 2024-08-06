@@ -3,6 +3,8 @@ const router = require('express').Router();
 
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
+router.get('/commerce-type/:id', controller.getByType);
+router.get('/commerce-filter/:name', controller.getByName);
 
 router.post('/',controller.create);
 
