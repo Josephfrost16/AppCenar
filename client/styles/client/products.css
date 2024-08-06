@@ -1,9 +1,10 @@
 .data {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-top: 7rem;
     padding: 2rem;
     gap: 1rem;
+    justify-content: center;
   }
   
   .titleData {
