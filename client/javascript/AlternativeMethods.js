@@ -1,3 +1,5 @@
+import {jwtDecode} from 'jwt-decode';
+
 export function scrollLeft(content) {
     const carousel = document.getElementById(content);
     carousel.scrollBy({
@@ -15,3 +17,12 @@ export function scrollRight(content) {
       behavior: 'smooth'
     });
   }
+
+export function decodeToken(token){
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      console.error('Token decofied Error',error);
+      return null;
+    }
+}

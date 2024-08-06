@@ -1,12 +1,18 @@
 const jwt = require('jsonwebtoken');
 
-exports.SignToken = (user,secret,rol) =>{
-    return jwt.sign({
-        id: user.id,
-        username: user.name,
-        email: user.email,
-        role: rol,
-        HoraCreacion: new Date().getTime(),
-        exp: new Date().getTime() + 60 *5000  // 5 minutos
-    }, secret);
+class TokenConfig {
+    static SignToken(data, secret) {
+      return jwt.sign(data, secret, { expiresIn: '1h' });
+    }
+
+    static VerifyToken(token, secret) {
+        try {
+          return jwt.verify(token, secret);
+        } catch (err) {
+          throw new Error('Invalid token');
+        }
+      }
+    
 }
+
+module.exports = TokenConfig;

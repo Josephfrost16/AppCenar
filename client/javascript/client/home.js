@@ -1,4 +1,6 @@
 import {scrollLeft, scrollRight} from '../AlternativeMethods.js';
+import { decodeToken } from '../AlternativeMethods.js';
+
 const left1 = document.getElementById('left1');
 const right1 = document.getElementById('right1');
 
@@ -15,7 +17,28 @@ document.addEventListener('DOMContentLoaded', ()=>{
     Fill('content3',1);
     Fill('content4',3);
     Fill('content5',4);
+    console.log(getToken());
+    fillHeader();
 })
+
+function fillHeader(){
+    const data = getToken();
+    const profile = document.querySelector('.profile');
+    profile.innerHTML = `
+        <img src="${data.user.photo}" alt="">
+        <label for="" class="nameProfile">${data.user.name + data.user.lastName}</label>
+    `;
+}
+
+function getToken(){
+    const token = localStorage.getItem('authToken');
+    if (token) {
+        return decodeToken(token);
+    }else{
+        console.error('token no found')
+        return null
+    }
+}
 
 function addScrollEvents(){
     left1.addEventListener('click', ()=>{

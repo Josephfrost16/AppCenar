@@ -42,7 +42,6 @@ const createSuperAdmin = async () =>{
                 name:"Admin",
                 lastName:"",
                 accountType:1,
-                photo:"",
                 email:"administrador@google.com",
                 country:"Republica Dominicana",
                 phone:"555-555-555",
