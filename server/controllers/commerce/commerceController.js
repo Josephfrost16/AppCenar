@@ -32,6 +32,16 @@ exports.getByType = async (req,res) =>{
     }
 }
 
+exports.getByName = async (req,res) =>{
+    try {
+        const {name} = req.params
+        const commerce = await Commerce.findAll({where:{name:name}});
+        res.status(200).json(commerce);
+        
+    } catch (error) {
+        res.status(500).json({'error':error});
+    }
+}
 
 
 exports.create = async (req,res) =>{

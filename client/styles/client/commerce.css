@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+body{
+    animation: fadeIn 0.5s forwards;
+}
+
 .header img {
     width: 140px;
     object-fit: scale-down;

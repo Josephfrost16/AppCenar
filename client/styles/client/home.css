@@ -6,6 +6,10 @@
     align-items: center;
 }
 
+body{
+    animation: fadeIn 0.5s forwards;
+}
+
 .header img {
     width: 140px;
     object-fit: scale-down;
@@ -109,8 +113,10 @@
 .content{
     display: flex;
     gap: 1rem;
-    scroll-behavior:smooth;
+    scroll-behavior:auto;
     overflow: hidden;
+    transition: 0.2s;
+    
 }
 
 .titleSector{
@@ -302,3 +308,25 @@
 .slider:active{
     transform: scale(0.95);
 }
+
+@media (max-width: 600px) {
+    body {
+       zoom:0.8;/* Escala la página a 120% para pantallas pequeñas */
+    }
+  }
+  
+  /* Media Query para pantallas medianas (ej. tablets) */
+  @media (min-width: 601px) and (max-width: 1200px) {
+    body {
+       zoom: 0.4;/* Escala la página a 110% para pantallas medianas */
+    }
+  }
+  
+  /* Media Query para pantallas grandes (ej. desktop) */
+  @media (min-width: 1201px) and (max-width: 1800px){
+    body {
+         zoom: 0.8;/* Mantén el escalado original para pantallas grandes */
+    }
+    
+  }
+    

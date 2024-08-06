@@ -19,7 +19,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
     Fill('content5',4);
     console.log(getToken());
     fillHeader();
+    localeFilter();
 })
+
+
+function localeFilter(){
+    
+    const searchBtn = document.getElementById('searchIcon');
+    searchBtn.addEventListener('click', ()=>{
+        const localName = document.getElementById('localeFilter').value;
+        localStorage.setItem('localName',localName);
+        window.location.href = '../../pages/client/commerce.html'
+    })
+    
+}
 
 function fillHeader(){
     const data = getToken();
