@@ -10,7 +10,11 @@ const right3 = document.getElementById('right3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
     getCommerceCategory();
+    getAllCommerces();
     addScrollEvents();
+    Fill('content3',1);
+    Fill('content4',3);
+    Fill('content5',4);
 })
 
 function addScrollEvents(){
@@ -46,7 +50,7 @@ function getCommerceCategory(){
         }
         return response.json();
     }).then(data =>{
-        const content = document.querySelector('.content');
+        const content = document.getElementById('content1');
         for (let i = 0; i < data.length; i++) {
             const card = document.createElement('div');
             card.className  = "cardType";
@@ -63,5 +67,73 @@ function getCommerceCategory(){
     })
 }
 
+function getAllCommerces(){
+    fetch('http://localhost:4090/api/commerce').then(response => {
+        if(!response.ok){
+            throw new Error('fetch error');
+        }
+        return response.json();
+    }).then(data =>{
+        const content = document.getElementById('content2');
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('div');
+            card.className  = "cardCommerce";
+            card.innerHTML = `
+               <img class="banner" src="${data[i].banner}" alt="">
+                <div class="infoCommerce">
+                    <img src="${data[i].logo}" alt="">
+                    <div class="data">
+                        <div class="titleData">
+                            <label for="" class="name">${data[i].name}</label>
+                            <span class="material-symbols-outlined">kid_star</span>
+                            <label for="" class="calification">4.2</label>
+                        </div>
+                        <label for="" class="delivery">15-30 min • Envio $ 90</label>
+                    </div>    
+                </div>
+            `
+            content.appendChild(card);
+        }
 
-  
+    }).catch(err=>{
+        console.error('get error', err)
+    })
+}
+
+function Fill(contentName, commerceId){
+    getCommerceByType(commerceId).then(data=>{
+        const content = document.getElementById(contentName);
+        for (let i = 0; i < 6; i++) {
+            const card = document.createElement('div');
+            card.className  = "cardCommerce";
+            card.innerHTML = `
+               <img class="banner" src="${data[i].banner}" alt="">
+                <div class="infoCommerce">
+                    <img src="${data[i].logo}" alt="">
+                    <div class="data">
+                        <div class="titleData">
+                            <label for="" class="name">${data[i].name}</label>
+                            <span class="material-symbols-outlined">kid_star</span>
+                            <label for="" class="calification">4.2</label>
+                        </div>
+                        <label for="" class="delivery">15-30 min • Envio $ 90</label>
+                    </div>    
+                </div>
+            `
+            content.appendChild(card);
+        }
+            
+    }).catch(err => {
+        console.error(err);
+    })
+}
+
+
+async function getCommerceByType(commerceId){
+    let commerces = await fetch(`http://localhost:4090/api/commerce/commerce-type/${commerceId}`);
+    if (!commerces.ok) {
+        throw new Error('fetch error')
+    }
+    const data = await commerces.json() 
+    return data
+}

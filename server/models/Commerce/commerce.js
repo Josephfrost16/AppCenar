@@ -25,7 +25,7 @@ const commerce = sequelize.define('commerce',{
         allowNull:true
     },
     banner:{
-        type:DataTypes.STRING,
+        type:DataTypes.TEXT,
         allowNull:true
     }
     ,
