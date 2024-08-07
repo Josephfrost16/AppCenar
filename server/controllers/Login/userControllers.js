@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const Encryption = require('../../helpers/Encryption');
 
+const TokenConfig =  require('../../helpers/generateToken');
 
 exports.getAll = async (req,res) =>{
     try {
@@ -46,6 +47,8 @@ exports.create = async (req,res) =>{
           zip:zip,
           password:encryptedPassword
         });
+        const token = TokenConfig.SignToken({email,code});
+        
 
         res.status(200).json(user);
     } catch (error) {

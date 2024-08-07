@@ -49,8 +49,9 @@ const orders_details_routes = require('./routes/orders/orders_details_router');
 const orders_routes = require('./routes/orders/orders_routes');
 const directions_routes = require('./routes/other/directions_routes');
 const favorites_routes = require('./routes/other/favorites_routes');
-const product_category_routes = require('./routes/products/product_category_routes');
 const product_routes = require('./routes/products/product_routes');
+const routes_404 = require('./routes/404/404Routes');
+
 
 // Creando los endPoints
 app.use('/api/user',userRoutes);
@@ -61,8 +62,9 @@ app.use('/api/orders_details',orders_details_routes);
 app.use('/api/orders', orders_routes);
 app.use('/api/directions',directions_routes);
 app.use('/api/favorites',favorites_routes);
-// app.use('/api/product_category', product_category_routes);
 app.use('/api/product_routes', product_routes);
+// Ruta not found:
+app.use('/api/*', routes_404);
 
 //  Sincronizando Sequelize
 sequelize.sync({force:true})

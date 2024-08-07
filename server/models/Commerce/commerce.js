@@ -54,6 +54,14 @@ const commerce = sequelize.define('commerce',{
     state:{
         type:DataTypes.INTEGER,
         defaultValue: 0
+    },
+    resetToken:{
+        type: DataTypes.STRING,
+        allowNull: true  
+    },
+    resetTokenExpiration:{
+        type: DataTypes.DATE,
+        allowNull: true
     }
 });
 
