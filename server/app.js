@@ -70,10 +70,11 @@ sequelize.sync()
     // servidor escuchando
     
     // insertando datos para el force
-    createUserTypes();
-    createCommerceTypes();
-    createSuperAdmin();
-    createCommerce();
+    // createUserTypes();
+    // createCommerceTypes();
+    // createSuperAdmin();
+    // createCommerce();
+
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)
     });

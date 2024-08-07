@@ -61,8 +61,9 @@ const User = sequelize.define('User',{
         allowNull:true
     },
     resetToken:{
-        type: DataTypes.STRING,
-        allowNull: true
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: null
     }
 });
 

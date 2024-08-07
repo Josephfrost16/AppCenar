@@ -26,6 +26,8 @@ exports.generateToken = async (req, res) => {
   try {
     // Obtener usuario especifico:
     const { email, password } = req.body;
+    console.log(req.body);
+
     let rol = "";
 
     const user = await User.findOne({ where: { email } });
@@ -50,8 +52,10 @@ exports.generateToken = async (req, res) => {
         return res.status(401).json({ error: "Incorrect password" });
       }
 
-      const token = TokenConfig.SignToken({ email, rol }, secret);
-    
+      console.log(user.toJSON());
+
+      const token = TokenConfig.SignToken({ Users: user.toJSON(), rol }, secret);
+
       user.resetToken = token;
       await user.save();
 

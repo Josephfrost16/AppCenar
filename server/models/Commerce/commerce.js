@@ -61,7 +61,8 @@ const commerce = sequelize.define('commerce',{
     },
     resetToken:{
         type: DataTypes.STRING,
-        allowNull: true  
+        allowNull: true,
+        defaultValue: null
     }
 
 });

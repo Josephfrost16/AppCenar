@@ -59,12 +59,11 @@ exports.create = async (req,res) =>{
             phone:phone,
             zip:zip,
             password:encryptedPassword,
-            // resetToken: token
           });
 
 
         res.status(200).json({success: true,
-            user,msg: 'registrado correctamente'});
+            user, message: 'registrado correctamente'});
 
     } catch (error) {
         console.error('create error', error)
@@ -126,11 +125,11 @@ try{
     // Obtencion de la data del token.
     console.log(data);
 
-    const {email} = data;
+    const {Users} = data;
 
     // Verificar la existencia del usuario
     
-    const user = await User.findOne({where:{email}}) || null;
+    const user = await User.findOne({where:{email: Users.email}}) || null;
 
     if (user === null){
         return res.json({
