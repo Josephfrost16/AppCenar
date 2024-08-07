@@ -58,8 +58,12 @@ const User = sequelize.define('User',{
         type: DataTypes.INTEGER,
         defaultValue:null,
         allowNull:true
+    },
+    resetToken:{
+        type: DataTypes.TEXT,
+        allowNull: true,
+        defaultValue: null
     }
-
 });
 
 userType.hasMany(User, {foreignKey: 'accountType'});

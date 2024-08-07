@@ -1,16 +1,11 @@
 // Importando modulos a usar
-const express = require("express");
-const cors = require("cors");
-const sequelize = require("./database/conexion");
-const {
-  createUserTypes,
-  createCommerceTypes,
-  createSuperAdmin,
-  createCommerce,
-} = require("./helpScripts");
-const multer = require("multer");
-const { v4: uuidv4 } = require("uuid");
-const path = require("path");
+const express = require('express');
+const cors = require('cors');
+const sequelize = require('./database/conexion');
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts");
+// const session = require('express-session');
+
+require('dotenv').config();
 
 // Creando las variables intermediarias
 const app = express();
@@ -19,6 +14,10 @@ const PORT = 4090;
 // Gestionando middlewares
 app.use(express.json());
 app.use(cors());
+
+
+// const Authentication = require('./helpers/generateToken');
+
 
 // Importando los modelos
 require("./models/User/user");
@@ -47,9 +46,9 @@ const orders_details_routes = require('./routes/orders/orders_details_router');
 const orders_routes = require('./routes/orders/orders_routes');
 const directions_routes = require('./routes/other/directions_routes');
 const favorites_routes = require('./routes/other/favorites_routes');
-const product_category_routes = require('./routes/products/product_category_routes');
-const commerce_category_routes = require('./routes/commerce/commerce_categorys_routes')
 const product_routes = require('./routes/products/product_routes');
+const routes_404 = require('./routes/404/404Routes');
+
 
 // Creando los endPoints
 app.use("/api/user", userRoutes);
@@ -81,9 +80,9 @@ app.use('/api/orders_details',orders_details_routes);
 app.use('/api/orders', orders_routes);
 app.use('/api/directions',directions_routes);
 app.use('/api/favorites',favorites_routes);
-// app.use('/api/product_category', product_category_routes);
-app.use('/api/product', product_routes);
-app.use('/api/commerce_categorys', commerce_category_routes)
+app.use('/api/product_routes', product_routes);
+// Ruta not found:
+app.use('/api/*', routes_404);
 
 //  Sincronizando Sequelize
 sequelize
@@ -93,17 +92,13 @@ sequelize
     // servidor escuchando
 
     // insertando datos para el force
+    // createUserTypes();
+    // createCommerceTypes();
+    // createSuperAdmin();
+    // createCommerce();
 
-    createUserTypes();
-    createCommerceTypes();
-    createSuperAdmin();
-    createCommerce();
-  //  createProducts();
-  //  createCommerceCategory();
-   
-
-    app.listen(PORT, () => {
-      console.log(`Server listen on port http://localhost:${PORT}`);
+    app.listen(PORT,() => {
+        console.log(`Server listen on port http://localhost:${PORT}`)
     });
   })
   .catch((err) => {
