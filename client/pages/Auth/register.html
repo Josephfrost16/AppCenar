@@ -41,17 +41,17 @@
                 <button class="btn next" id="nextType"> Siguiente </button>
             </div>
 
-                <div class="contact flex none">
-                    <form enctype="multipart/form-data" method="POST" class="" action="/upload-photo" id="pi-data">
-                        <p>Nombre<span>*</span></p>
-                        <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
-                        <p>Apellido (opcional)</p>
-                        <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
-                        <p>Sube una foto</p>
-                        <input class="capitalize" type="file" id="photo" name="photo" accept="image/png, image/jpeg">
-                    </form>
-                    <button class="btn next" id="nextContact" type="submit"> Siguiente </button>
-                </div>
+            <div class="contact flex none">
+                <form class="" action="">
+                    <p>Nombre<span>*</span></p>
+                    <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
+                    <p>Apellido (opcional)</p>
+                    <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
+                    <p>Sube una foto</p>
+                    <input class="capitalize" type="file"  accept="image/*" id="photo" placeholder="Escribe tu apellido">
+                </form>
+                <button class="btn next" id="nextContact"> Siguiente </button>
+            </div>
 
             <div class="commerce flex none">
                 <form  enctype="multipart/form-data" class="" action="">
@@ -59,7 +59,7 @@
                     <input class="capitalize" type="text" id="commerceName" placeholder="Escribe tu nombre...">
                     <p>¿De que es tu negocio?</p>
                     <select name="commerce" id="commerce">
-                        <option value="">Farmacia</option>
+                        <option value="1">Farmacia</option>
                     </select>
                     <p>Logo</p>
                     <input class="capitalize" type="file" id="commerceLogo">
@@ -71,10 +71,10 @@
                 <form  enctype="multipart/form-data" class="" action="">
                     <p>Pais</p>
                     <select name="country" id="country" title="Pais">
-                        <option value="">Republica Dominicana</option>
+                        <option value="1">Republica Dominicana</option>
                     </select>
                     <p>Telefono<span>*</span></p>
-                    <input class="" type="text" id="phone" placeholder="___-___-___">
+                    <input class="" type="number" id="phone" placeholder="___-___-___">
                     <p>Codigo Postal<span>*</span></p>
                     <input class="" type="text" id="postalCode" placeholder="11003">
                 </form>
@@ -96,6 +96,6 @@
 
     </div>
 
-    <script src="../../javascript/register.js"></script>
+    <script src="../../javascript/auth/register.js"></script>
 </body>
 </html>

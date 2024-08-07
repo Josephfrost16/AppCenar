@@ -22,14 +22,24 @@ const commerce = sequelize.define('commerce',{
     },
     logo:{
         type:DataTypes.STRING,
-        allowNull:true
+        allowNull:true,
+        defaultValue:'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'
     },
+    banner:{
+        type:DataTypes.TEXT,
+        allowNull:true
+    }
+    ,
     email:{
         type:DataTypes.STRING,
         allowNull:false,
         unique:true
     },
     country:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
+    direction:{
         type:DataTypes.STRING,
         allowNull:false
     },
@@ -49,6 +59,7 @@ const commerce = sequelize.define('commerce',{
         type:DataTypes.INTEGER,
         defaultValue: 0
     }
+
 });
 
 commerceType.hasMany(commerce, {foreignKey: 'commerceTypeId'});
