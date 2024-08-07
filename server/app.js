@@ -64,7 +64,7 @@ app.use('/api/product_routes', product_routes);
 app.use('/api/*', routes_404);
 
 //  Sincronizando Sequelize
-sequelize.sync({force:true})
+sequelize.sync()
 .then(()=>{
     console.log('Database Connection was successfully'); 
     // servidor escuchando
