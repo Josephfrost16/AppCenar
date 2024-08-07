@@ -1,3 +1,4 @@
+const commerce_category = require('../../models/Commerce/commerce_category');
 const product = require('../../models/Products/product');
 
 exports.getAll = async (req,res) =>{
@@ -15,6 +16,21 @@ exports.getById = async (req,res) =>{
         const Product = await product.findOne({where:{id:id}});
         res.status(200).json(Product);
         
+    } catch (error) {
+        res.status(500).json({'error':error});
+    }
+}
+
+exports.getProductsByCommerce = async (req,res) =>{
+    try {
+        const {id} = req.params
+        const categories = await commerce_category.findAll({
+            where:{commerce_id:id},
+            include:product
+    });
+        const products = categories.flatMap(category => category.products);
+       res.status(200).json(products);
+
     } catch (error) {
         res.status(500).json({'error':error});
     }

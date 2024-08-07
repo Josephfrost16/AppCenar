@@ -33,9 +33,15 @@ function Login() {
         .then(data=>{
     
             if(data){
+                localStorage.removeItem('authToken'); 
                 localStorage.setItem('authToken',data.token);
                 console.log('token saved in localstorage');
-                window.location.href = '../../pages/client/home.html';
+
+                if (data.user.state===1){
+                    window.location.href = '../../pages/client/home.html';
+                }else{
+                    alert("Tu usuario actualmente esta desactivado,Revisa tu correo y clicka el link  de activacion:");
+                }
             }
            
         }).catch(err=>{

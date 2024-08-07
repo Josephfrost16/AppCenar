@@ -39,6 +39,10 @@ const commerce = sequelize.define('commerce',{
         type:DataTypes.STRING,
         allowNull:false
     },
+    direction:{
+        type:DataTypes.STRING,
+        allowNull:false
+    },
     phone:{
         type:DataTypes.STRING,
         allowNull:false
@@ -54,7 +58,13 @@ const commerce = sequelize.define('commerce',{
     state:{
         type:DataTypes.INTEGER,
         defaultValue: 0
+    },
+    resetToken:{
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
     }
+
 });
 
 commerceType.hasMany(commerce, {foreignKey: 'commerceTypeId'});

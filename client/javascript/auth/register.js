@@ -67,9 +67,17 @@ function add(){
             return response.json();
         })
         .then(data=>{
-            
             console.log('usuario creado correctamente', data);
-    
+
+            // localStorage.removeItem('authToken'); 
+            // localStorage.setItem('authToken',data.token);
+            // console.log('token saved in localstorage');
+
+            // alert("Te enviamos un correo de verificacion:");
+            
+            window.location.href = '../../pages/Auth/login.html';
+
+            
         }).catch(err=>{
             console.log('Hubo un error en el fectch ',err)
         })
