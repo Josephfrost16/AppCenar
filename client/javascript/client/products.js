@@ -141,3 +141,10 @@ function updateSubtotal() {
 
     subtotalLabel.textContent = `RD$ ${subtotal.toFixed(2)}`;
 }
+
+
+const logoContainer = document.querySelector('.logoContainer');
+
+logoContainer.addEventListener('click', ()=>{
+    window.history.back();
+})
