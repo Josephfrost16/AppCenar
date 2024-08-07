@@ -40,16 +40,14 @@ exports.create = async (req,res) =>{
         // Encriptacion de clave:
         const encryptedPassword = await Encryption.encrypt(password);
         
-        // console.log('Secret:', secret); 
-        // // Generar token:
-        // const token = TokenConfig.SignToken({email});
+        const check = await User.findOne({where:{email}});
 
-        // // template:
-        // const template = await getTemplate(name, token);
-        
-        // // Verificacion de cuenta:
-        // await sendMail(email,"Registro",template);
-
+        if (check){
+            return res.json({
+                success: false,
+                message: 'Ya existe un usuario con este email',
+            })
+        }
 
         const user = await User.create({
             name: name,
