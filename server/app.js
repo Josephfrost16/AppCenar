@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts");
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce,createCommerceCategory,createProducts } = require("./helpScripts");
 // const session = require('express-session');
 
 require('dotenv').config();
@@ -76,6 +76,8 @@ sequelize.sync()
     // createCommerceTypes();
     // createSuperAdmin();
     // createCommerce();
+    // createCommerceCategory();
+    // createProducts();
 
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)
