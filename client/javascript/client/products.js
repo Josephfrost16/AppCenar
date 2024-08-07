@@ -84,7 +84,7 @@ function addToMiniCart(product) {
         miniCartProducts.classList.remove('none');
     }
 
-    // Verificar si el producto ya está en el carrito comparando el nombre completo
+ 
     const existingProduct = Array.from(miniCartProducts.children).find(child => 
         child.getAttribute('data-fullname') === product.name
     );
@@ -93,8 +93,8 @@ function addToMiniCart(product) {
         alert('Este producto ya está en tu carrito.');
         return;
     }
-    
-    // Truncar el nombre del producto si tiene más de 10 caracteres
+
+
     let truncatedName = product.name;
     if (truncatedName.length > 10) {
         truncatedName = truncatedName.substring(0, 10) + '...';
@@ -111,13 +111,33 @@ function addToMiniCart(product) {
     
     miniCartProducts.appendChild(productCard);
 
+  
+    updateSubtotal();
+
     const deleteButton = productCard.querySelector('.delete');
     deleteButton.addEventListener('click', () => {
         miniCartProducts.removeChild(productCard);
+        
+       
+        updateSubtotal();
 
         if (miniCartProducts.children.length === 0) {
             emptyMessage.classList.remove('none');
             miniCartProducts.classList.add('none');
         }
     });
+}
+
+function updateSubtotal() {
+    const miniCartProducts = document.querySelector('.miniCart .products');
+    const subtotalLabel = document.querySelector('.miniCart .subTotal .value');
+    let subtotal = 0;
+
+    Array.from(miniCartProducts.children).forEach(child => {
+        const priceLabel = child.querySelector('.price').textContent;
+        const price = parseFloat(priceLabel.replace('RD$ ', ''));
+        subtotal += price;
+    });
+
+    subtotalLabel.textContent = `RD$ ${subtotal.toFixed(2)}`;
 }
