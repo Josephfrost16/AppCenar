@@ -1,0 +1,68 @@
+.carCard{
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+
+.cardDirections{
+    width: 700px;
+    height: 400px;
+}
+
+.checkbox{
+    display: flex;
+    gap: 5px;
+    padding: 10px 30px 10px 30px;
+}
+
+.directionContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.cardDirectionDesc{
+    font-size: 12px;
+}
+
+.carCardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.btnPedir{
+    width: 400px;
+    height: 27px;
+    font-size: 11px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-weight: bold !important;
+    background-color: #ffffff;
+}
+.btnPedir:hover{
+    cursor: pointer;
+    background-color: #ffe68066;
+}
+.dataDirection{
+    display: flex;
+    flex-direction: row;
+    margin-top: 7rem;
+    padding: 2rem;
+    gap: 1rem;
+    justify-content: center;
+    
+}
+
+.dataDirection img {
+    width: 50px;
+    height: 50px;
+    border-radius: 0.5rem;
+  }
+
+  .lineCard{
+    width: 310px;
+  }
