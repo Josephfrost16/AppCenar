@@ -137,6 +137,7 @@ try{
             message: 'Usuario no encontrado'
         })
     }
+
     console.log({'token':token, 'token de usuario': user.resetToken});
     // Verificar el secret
     if (token !== user.resetToken){
@@ -145,6 +146,7 @@ try{
             message: 'Token invalido'
         })
     }
+    
     // Actualizar usuario
     user.state = 1;
     await user.save();

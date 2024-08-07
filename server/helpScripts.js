@@ -48,7 +48,8 @@ const createSuperAdmin = async () =>{
                 country:"Republica Dominicana",
                 phone:"555-555-555",
                 zip:"11003",
-                password:EncryptedPassword
+                password:EncryptedPassword,
+                state: 1
               }
           );
     } catch (error) {

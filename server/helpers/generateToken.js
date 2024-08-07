@@ -18,7 +18,7 @@ class TokenConfig {
       return data;
     }
 
-    static VerifyToken(token, secret) {
+    static VerifyToken(token) {
         try {
           return jwt.verify(token, secret);
         } catch (err) {

@@ -54,6 +54,15 @@ exports.generateToken = async (req, res) => {
 
       console.log(user.toJSON());
 
+      if (user.resetToken){
+        try{
+          const decoded =  TokenConfig.VerifyToken(user.resetToken);
+          console.log('Decoded payload:', decoded);
+        }catch(err){
+          console.error('Token verification failed',err.message);
+        }
+      }
+
       const token = TokenConfig.SignToken({ Users: user.toJSON(), rol }, secret);
 
       user.resetToken = token;
@@ -79,7 +88,7 @@ exports.generateToken = async (req, res) => {
       }
 
       const token = TokenConfig.SignToken(
-        { email, rol },
+        { Commerces: commerce.toJSON(), rol },
         secret
       );
 
