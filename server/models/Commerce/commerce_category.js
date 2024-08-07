@@ -18,13 +18,13 @@ const commerce_category = sequelize.define('commerce_category', {
         type: DataTypes.INTEGER,
         references:{
             model: commerce,
-            key:"id"
-        }
+            key:"id",
+        }, 
     }
 })
 
-commerce.hasMany(commerce_category,{foreignKey:'commerce_id'});
-commerce_category.belongsTo(commerce,{foreignKey:'commerce_id'});
+commerce.hasMany(commerce_category,{foreignKey:'commerce_id',onDelete:'CASCADE',onUpdate:'CASCADE'});
+commerce_category.belongsTo(commerce,{foreignKey:'commerce_id',onDelete:'CASCADE',onUpdate:'CASCADE'});
 
 module.exports = commerce_category;
 

@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts")
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce,createCommerceCategory,createProducts } = require("./helpScripts")
 
 // Creando las variables intermediarias
 const app = express();
@@ -53,19 +53,23 @@ app.use('/api/orders', orders_routes);
 app.use('/api/directions',directions_routes);
 app.use('/api/favorites',favorites_routes);
 // app.use('/api/product_category', product_category_routes);
-app.use('/api/product_routes', product_routes);
+app.use('/api/product', product_routes);
 
 //  Sincronizando Sequelize
-sequelize.sync({force:true})
+sequelize.sync()
 .then(()=>{
     console.log('Database Connection was successfully'); 
     // servidor escuchando
     
     // insertando datos para el force
-    createUserTypes();
-    createCommerceTypes();
-    createSuperAdmin();
-    createCommerce();
+
+    // createUserTypes();
+    // createCommerceTypes();
+    // createSuperAdmin();
+    // createCommerce();
+    // createProducts();
+    // createCommerceCategory();
+   
     
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)
