@@ -3,7 +3,9 @@ const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
 const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts");
-const session = require('express-session');
+// const session = require('express-session');
+
+require('dotenv').config();
 
 // Creando las variables intermediarias
 const app = express();
@@ -13,11 +15,6 @@ const PORT = 4090;
 app.use(express.json());
 app.use(cors());
 
-app.use(session({
-    secret: process.env.secret,
-    resave: false,
-    saveUninitialized: false
-}))
 
 // const Authentication = require('./helpers/generateToken');
 

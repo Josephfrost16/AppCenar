@@ -1,5 +1,5 @@
 
-
+const nodemailer = require('nodemailer');
 const Mail = {
     user: "josephninahonestoypuntual@gmail.com",
     pass: "sjku joto ikpu rjvp",
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
   const sendMail = async (email,subject,html)=>{
 
     await transporter.sendMail({
-        from: `MHCODE <${Mail.user}>`,
+        from: `AppCenar <${Mail.user}>`,
         to: email,
         subject,
         html
@@ -25,14 +25,22 @@ const transporter = nodemailer.createTransport({
   }
 
 
+  const getTemplate = async (name,token) =>{
+    return `
+    <div id="email_content">
+          <h2>Hola ${name}!</h2>
+          <h3>Usted solicitó un cambio de contraseña</h3>
+          <p>Haga click en el siguiente enlace para colocar una nueva contraseña.</p>
 
-  const getTemplate = (name,token)=>{
+          <a href= "http://localhost:8000/pages/Auth/newPassword.html">Cambio de contraseña</a>
+          <p>Si no solicitaste un cambio de contraseña, ignore este correo y ninguna acción será necesaria.</p>
+    </div>
+    
+    `
 
   }
 
-//   `
-//           <h3>Usted solicitó un cambio de contraseña</h3>
-//           <p>Haga click en el siguiente enlace para colocar una nueva contraseña.</p>
-//           <a href="http://localhost:4090/api/auth/reset/${token}">Cambio de contraseña</a>
-//           <p>Si no solicitaste un cambio de contraseña, ignore este correo y ninguna acción será necesaria.</p>
-//         `
+module.exports = {
+    sendMail,
+    getTemplate
+  }

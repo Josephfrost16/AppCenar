@@ -5,6 +5,8 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const Encryption = require("../../helpers/Encryption");
 
+const {sendMail,getTemplate} = require('../../helpers/mail_config');
+
 // Clave maestra :
 const secret = process.env.secret;
 
@@ -48,8 +50,22 @@ exports.generateToken = async (req, res) => {
         return res.status(401).json({ error: "Incorrect password" });
       }
 
-      const token = TokenConfig.SignToken({ user: user.toJSON(), rol }, secret);
-      return res.status(200).send({ token: token });
+      const token = TokenConfig.SignToken({ email, rol }, secret);
+    
+      user.resetToken = token;
+      await user.save();
+
+      //   Verificacion de estado:
+      if (user.state===0){
+        // template:
+        const template = await getTemplate(user.name, token);
+        
+        // Verificacion de cuenta:
+        await sendMail(email,"Activacion",template);
+
+      }
+      return res.status(200).send({ user:user,token: token });
+
     } else {
       rol = "Commerce";
 
@@ -59,10 +75,23 @@ exports.generateToken = async (req, res) => {
       }
 
       const token = TokenConfig.SignToken(
-        { commerce: commerce.toJSON(), rol },
+        { email, rol },
         secret
       );
-      return res.status(200).send({ token: token });
+
+      commerce.resetToken = token;
+      await commerce.save();
+      //   Verificacion de estado:
+      if (commerce.state===0){
+        
+        // template:
+        const template = await getTemplate(commerce.name, token);
+        
+        // Verificacion de cuenta:
+        await sendMail(email,"Activacion",template);
+
+      }
+      return res.status(200).send({ commerce:commerce, token: token });
     }
   } catch (err) {
     console.error("getToken error", err);
@@ -90,6 +119,7 @@ exports.PostReset = async (req, res, next) => {
       user.resetToken = token;
       user.resetTokenExpiration = Date.now() + 3600000;
       await user.save();
+
     } else {
       commerce.resetToken = token;
       commerce.resetTokenExpiration = Date.now() + 3600000;
@@ -103,7 +133,7 @@ exports.PostReset = async (req, res, next) => {
       html: `
         <h3>Usted solicitó un cambio de contraseña</h3>
         <p>Haga click en el siguiente enlace para colocar una nueva contraseña.</p>
-        <a href="http://localhost:4090/api/auth/reset/${token}">Cambio de contraseña</a>
+        <a href="http://localhost:8000/pages/Auth/newPassword.html">Cambio de contraseña</a>
         <p>Si no solicitaste un cambio de contraseña, ignore este correo y ninguna acción será necesaria.</p>
       `,
     });

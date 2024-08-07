@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const secret = process.env.SECRET;
 
 class TokenConfig {
-    static SignToken(data, secret) {
+    static SignToken(data) {
       return jwt.sign(data, secret, { expiresIn: '1h' });
     }
 

@@ -58,10 +58,6 @@ const commerce = sequelize.define('commerce',{
     resetToken:{
         type: DataTypes.STRING,
         allowNull: true  
-    },
-    resetTokenExpiration:{
-        type: DataTypes.DATE,
-        allowNull: true
     }
 });
 
