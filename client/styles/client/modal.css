@@ -1,0 +1,101 @@
+.contenido{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.headerD{
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+   
+}
+.a{
+    visibility: hidden;
+}
+.add{
+    display: flex;
+    justify-content: end;
+  
+  
+}
+
+.title{
+    
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.direcList{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: 0px 0px 3px #d3d3d3;
+    padding: 2rem;
+}
+
+.direcCard{
+    display: flex;
+    gap: 1rem;
+    border-bottom:1px solid #ddcfcf;
+    padding: 1rem;
+}
+
+.data{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex-grow: 1;
+}
+
+.btns{
+    display: flex;
+    gap: 1rem;
+}
+
+.btn{
+    flex-basis: auto !important;
+    padding: 0.4rem 2rem;
+    font-size: 1rem;
+}
+
+.name{
+    font-weight: bold;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #FFF;
+   
+}
+
+.description{
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    background-color: #FFF;
+   
+}
+
+.header{
+    display: flex;
+    padding: 1rem;
+    border-bottom: solid 1px #ffe680;
+    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+}
+
+body{
+    animation: fadeIn 0.5s forwards;
+}
+
+.header img {
+    width: 140px;
+    object-fit: scale-down;
+}
+
+.q{
+    flex-basis: 33%;
+}
+
