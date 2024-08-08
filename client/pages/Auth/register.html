@@ -42,13 +42,13 @@
             </div>
 
             <div class="contact flex none">
-                <form class="" action="">
+                <form enctype="multipart/form-data" id="formRegister" class="" action="/upload-photo">
                     <p>Nombre<span>*</span></p>
                     <input class="capitalize" type="text" id="firstName" placeholder="Escribe tu nombre...">
                     <p>Apellido (opcional)</p>
                     <input class="capitalize" type="text" id="lastName" placeholder="Escribe tu apellido">
                     <p>Sube una foto</p>
-                    <input class="capitalize" type="file"  accept="image/*" id="photo" placeholder="Escribe tu apellido">
+                    <input class="capitalize" type="file"  id="photo" name="photo" placeholder="Escribe tu apellido">
                 </form>
                 <button class="btn next" id="nextContact"> Siguiente </button>
             </div>

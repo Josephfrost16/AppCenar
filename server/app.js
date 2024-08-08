@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce } = require("./helpScripts");
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce,createCommerceCategory,createProducts } = require("./helpScripts");
 // const session = require('express-session');
 
 require('dotenv').config();
@@ -57,23 +57,27 @@ app.use("/api/commerceType", commerceType);
 app.use("/api/auth", authenticationRoutes);
 
 // //Confg Multer
-// const imgStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads/");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, `${uuidv4()}-${file.originalname}`);
-//   },
-// });
 
-// const upload = multer({ imgStorage });
+const multer = require("multer");
+const { v4: uuidv4 } = require("uuid");
 
-// app.post('/upload-photo', upload.single('photo'), (req, res) => {
-//     if (!req.file) {
-//       return res.status(400).json({ message: 'No file uploaded' });
-//     }
-//     res.status(200).json({ message: 'File uploaded successfully', file: req.file });
-//   });
+const imgStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, `${uuidv4()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ imgStorage });
+
+app.post('/upload-photo', upload.single('photo'), (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' });
+    }
+    res.status(200).json({ message: 'File uploaded successfully', file: req.file });
+  });
 
 
 app.use('/api/orders_details',orders_details_routes);
@@ -86,7 +90,7 @@ app.use('/api/*', routes_404);
 
 //  Sincronizando Sequelize
 sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Database Connection was successfully");
     // servidor escuchando
@@ -96,6 +100,8 @@ sequelize
     // createCommerceTypes();
     // createSuperAdmin();
     // createCommerce();
+    // createCommerceCategory();
+    // createProducts();
 
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)

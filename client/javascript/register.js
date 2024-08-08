@@ -192,12 +192,10 @@ function step3F() {
 document.getElementById("nextContact").addEventListener("click", function (event) {
     event.preventDefault();
   
-    const form = document.querySelector('#pi-data');
+    const form = document.querySelector('#formRegister');
+    console.log(form);
     const formData = new FormData(form);
-  
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
-    }
+    console.log(formData)
   
     fetch("http://localhost:4090/upload-photo", {
       method: "POST",
