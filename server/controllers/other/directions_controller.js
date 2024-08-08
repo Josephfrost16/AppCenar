@@ -19,6 +19,16 @@ exports.getById = async (req,res) =>{
     }
 }
 
+exports.getByUser = async (req,res) =>{
+    try {
+        const {id} = req.params
+        const direction = await directions.findAll({where:{user_id:id}});
+        res.status(200).json(direction);
+    } catch (error) {
+        res.status(500).json({'error':error});
+    }
+}
+
 exports.create = async (req,res) =>{
     try {
         const {location,description,user_id} = req.body

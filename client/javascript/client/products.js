@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", ()=>{
-    fillBanner(1);
-    fillSection(1);
+    fillBanner(localStorage.getItem('commerceSelected'));
+    fillSection(localStorage.getItem('commerceSelected'));
 });
 
 function fillBanner(commerceId){

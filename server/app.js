@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./database/conexion');
-const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce,createCommerceCategory,createProducts } = require("./helpScripts");
+const {createUserTypes,createCommerceTypes,createSuperAdmin, createCommerce,createCommerceCategory,createProducts, createLocations } = require("./helpScripts");
 // const session = require('express-session');
 
 require('dotenv').config();
@@ -70,14 +70,14 @@ sequelize.sync()
 .then(()=>{
     console.log('Database Connection was successfully'); 
     // servidor escuchando
-    
-    // insertando datos para el force
+
     // createUserTypes();
     // createCommerceTypes();
     // createSuperAdmin();
     // createCommerce();
     // createCommerceCategory();
     // createProducts();
+    // createLocations();
 
     app.listen(PORT,() => {
         console.log(`Server listen on port http://localhost:${PORT}`)

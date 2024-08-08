@@ -4,6 +4,7 @@ const commerceType = require('./models/Commerce/commerceType');
 const user = require('./models/User/user');
 const commerce = require('./models/Commerce/commerce');
 const commerceCategory = require('./models/Commerce/commerce_category');
+const location = require('./models/other/direction');
 
 const Encryption = require('./helpers/Encryption');
 const products = require('./models/Products/product');
@@ -215,6 +216,19 @@ const createProducts = async () =>{
     
 }
 
+const createLocations = async () =>{
+    try {
+        await location.bulkCreate([
+            {location:'Casa', description:'C/Eduardo Brito Av. Palmas Herrera', user_id:2},
+            {location:'Casa2', description:'C/Eduardo Brito2 Av. Palmas Herrera2', user_id:2},
+            {location:'Casa3', description:'C/Eduardo Brito3 Av. Palmas Herrera3', user_id:2}
+        ]);
+    }catch(error){
+        console.error('Error seeding User data:', error);
+    }
+}
+
+
 const lorem = ``
 
 
@@ -224,5 +238,6 @@ module.exports = {
     createSuperAdmin,
     createCommerce,
     createCommerceCategory,
-    createProducts
+    createProducts,
+    createLocations 
 }
