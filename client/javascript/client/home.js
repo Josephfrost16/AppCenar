@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     console.log(getToken());
     fillHeader();
     localeFilter();
+    fillDirection();
 })
 
 
@@ -38,9 +39,24 @@ function fillHeader(){
     const data = getToken();
     const profile = document.querySelector('.profile');
     profile.innerHTML = `
-        <img src="${data.user.photo}" alt="">
-        <label for="" class="nameProfile">${data.user.name + data.user.lastName}</label>
+        <img src="${data.Users.photo}" alt="">
+        <label for="" class="nameProfile">${data.Users.name + " " +data.Users.lastName}</label>
     `;
+}
+
+function fillDirection(){
+    const data = getToken();
+    const location = document.querySelector('.location');
+    fetch(`http://localhost:4090/api/directions/user/${data.Users.id}`).then(response => {
+        if(!response.ok){
+            throw new Error('fetch error');
+        }
+        return response.json();
+    }).then(data =>{
+        location.innerHTML = `${data[0].location} <span class="material-symbols-outlined">arrow_drop_down</span>` 
+    }).catch(err=>{
+        console.error('get error', err)
+    })
 }
 
 function getToken(){
@@ -95,6 +111,11 @@ function getCommerceCategory(){
                 <label for="" class="typeTitle" style="color:${data[i].fontColor};">${data[i].type}</label>
                 <img src="${data[i].icon}" alt="">
             `
+            card.addEventListener('click', ()=>{
+                localStorage.setItem('localName', data[i].id);
+                window.location.href = '../../pages/client/commerce.html'
+                
+            })
             content.appendChild(card);
         }
 
@@ -114,6 +135,7 @@ function getAllCommerces(){
         for (let i = 0; i < 6; i++) {
             const card = document.createElement('div');
             card.className  = "cardCommerce";
+            card.setAttribute('data-commerce-id', data[i].id)
             card.innerHTML = `
                <img class="banner" src="${data[i].banner}" alt="">
                 <div class="infoCommerce">
@@ -129,6 +151,11 @@ function getAllCommerces(){
                 </div>
             `
             content.appendChild(card);
+            card.addEventListener('click', ()=>{
+                localStorage.setItem('commerceSelected', data[i].id);
+                window.location.href = '../../pages/client/products.html'
+
+            })
         }
 
     }).catch(err=>{
@@ -157,6 +184,11 @@ function Fill(contentName, commerceId){
                 </div>
             `
             content.appendChild(card);
+            card.addEventListener('click', ()=>{
+                localStorage.setItem('commerceSelected', data[i].id);
+                window.location.href = '../../pages/client/products.html'
+                
+            })
         }
             
     }).catch(err => {
@@ -173,3 +205,10 @@ async function getCommerceByType(commerceId){
     const data = await commerces.json() 
     return data
 }
+
+const directionCont = document.querySelector('.direction');
+    directionCont.addEventListener('click',()=>{
+        const token = getToken();
+        localStorage.setItem('userId',token.Users.id);
+        window.location.href = "../../pages/client/directions.html";
+})

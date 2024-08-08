@@ -18,11 +18,13 @@ body{
 .direction{
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .location{
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .title{
@@ -308,6 +310,8 @@ body{
 .slider:active{
     transform: scale(0.95);
 }
+
+
 
 @media (max-width: 600px) {
     body {

@@ -36,6 +36,17 @@ exports.getProductsByCommerce = async (req,res) =>{
     }
 }
 
+exports.getProductsByCategories = async (req,res) =>{
+    try {
+        const {id} = req.params;
+        const Product = await product.findAll({where:{category_id:id}});
+        res.status(200).json(Product);
+        
+    } catch (error) {
+        res.status(500).json({'error':error});
+    }
+}
+
 exports.create = async (req,res) =>{
     try {
         const {name,image,description,price,category_id} = req.body;

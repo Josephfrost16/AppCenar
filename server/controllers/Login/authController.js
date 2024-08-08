@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const Encryption = require("../../helpers/Encryption");
 
-const {sendMail,getTemplate} = require('../../helpers/mail_config');
+const {sendMail,getTemplate,getTemplate2} = require('../../helpers/mail_config');
 
 // Clave maestra :
 const secret = process.env.secret;
@@ -54,6 +54,15 @@ exports.generateToken = async (req, res) => {
 
       console.log(user.toJSON());
 
+      if (user.resetToken){
+        try{
+          const decoded =  TokenConfig.VerifyToken(user.resetToken);
+          console.log('Decoded payload:', decoded);
+        }catch(err){
+          console.error('Token verification failed',err.message);
+        }
+      }
+
       const token = TokenConfig.SignToken({ Users: user.toJSON(), rol }, secret);
 
       user.resetToken = token;
@@ -79,7 +88,7 @@ exports.generateToken = async (req, res) => {
       }
 
       const token = TokenConfig.SignToken(
-        { email, rol },
+        { Commerces: commerce.toJSON(), rol },
         secret
       );
 
@@ -121,30 +130,26 @@ exports.PostReset = async (req, res, next) => {
 
     if (user) {
       user.resetToken = token;
-      user.resetTokenExpiration = Date.now() + 3600000;
       await user.save();
 
-    } else {
-      commerce.resetToken = token;
-      commerce.resetTokenExpiration = Date.now() + 3600000;
-      await commerce.save();
-    }
+      const template = await getTemplate2(user.name, token);
 
-    await transporter.sendMail({
-      from: "josephninahonestoypuntual@gmail.com",
-      to: email,
-      subject: "Reset Password Request",
-      html: `
-        <h3>Usted solicitó un cambio de contraseña</h3>
-        <p>Haga click en el siguiente enlace para colocar una nueva contraseña.</p>
-        <a href="http://localhost:8000/pages/Auth/newPassword.html">Cambio de contraseña</a>
-        <p>Si no solicitaste un cambio de contraseña, ignore este correo y ninguna acción será necesaria.</p>
-      `,
-    });
-
-    res
+      await sendMail(email,"Reset Password",template);
+      res
       .status(200)
       .json({ message: "Password reset email sent successfully." });
+    } else {
+      commerce.resetToken = token;
+
+      const template = await getTemplate2(commerce.name, token);
+      await commerce.save();
+
+      await sendMail(email,"Reset Password",template);
+
+      res
+      .status(200)
+      .json({ message: "Password reset email sent successfully." });
+    }
   } catch (err) {
     console.error(err);
     res
@@ -153,46 +158,4 @@ exports.PostReset = async (req, res, next) => {
   }
 };
 
-exports.GetNewPassword = async (req, res) => {
 
-  const{token,NewPassword}  = req.body;
-
-  User.findOne({
-    where: {
-      resetToken: token,
-      resetTokenExpiration: { [Op.gte]: Date.now() },
-    },
-  }).then((user)=>{
-    
-        if (user){
-            user.password =  Encryption.encrypt(NewPassword); 
-            user.resetToken = null;
-            user.resetTokenExpiration = null;
-            user.save();
-
-            return res.status(200).json({ passwordToken: token, userId: user.id });
-        }
-
-        Commerce.findOne({
-            where: {
-              resetToken: token,
-              resetTokenExpiration: { [Op.gte]: Date.now() },
-            },
-        }).then((commerce)=>{
-           
-            if (commerce){
-
-                commerce.password =  Encryption.encrypt(NewPassword); // Asegúrate de usar bcrypt para hashear la nueva contraseña
-                commerce.resetToken = null;
-                commerce.resetTokenExpiration = null;
-                commerce.save();
-                return res.status(200).json({ passwordToken: token, userId: commerce.id });
-            }
-            return res.status(404).json({ error: "Token invalido o expirado." });
-
-        }).catch((error)=>{
-            console.error(err);
-            return res.status(500).json({ error: "Error interno del servidor." });
-        })
-  })
-};

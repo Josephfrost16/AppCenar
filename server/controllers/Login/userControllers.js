@@ -1,6 +1,5 @@
 const User = require('../../models/User/user');
 
-const bcrypt = require('bcrypt');
 
 const Encryption = require('../../helpers/Encryption');
 
@@ -19,6 +18,7 @@ exports.getAll = async (req,res) =>{
         res.status(500).json({'error':error});
     }
 }
+
 
 exports.getById = async (req,res) =>{
     try {
@@ -137,6 +137,7 @@ try{
             message: 'Usuario no encontrado'
         })
     }
+
     console.log({'token':token, 'token de usuario': user.resetToken});
     // Verificar el secret
     if (token !== user.resetToken){
@@ -145,6 +146,7 @@ try{
             message: 'Token invalido'
         })
     }
+
     // Actualizar usuario
     user.state = 1;
     await user.save();
@@ -159,6 +161,24 @@ try{
 }
 }
 
+exports.GetNewPassword = async (req, res) => {
 
-
-
+    const{token,NewPassword}  = req.body;
+  
+    User.findOne({where: {resetToken: token}}
+    ).then((user)=>{
+      
+          if (user){
+              user.password =  Encryption.encrypt(NewPassword); 
+              console.log(user.resetToken);
+              user.resetToken = null;
+              user.save();
+  
+              return res.status(200).json({ passwordToken: token, userId: user.id });
+          }
+        return res.status(404).json({ error: "Token invalido o expirado." });
+          }).catch((error)=>{
+              console.error(err);
+              return res.status(500).json({ error: "Error interno del servidor." });
+          })
+    }

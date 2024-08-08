@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
   });
 
 
-  const sendMail = async (email,subject,html)=>{
+  exports.sendMail = async (email,subject,html)=>{
 
     await transporter.sendMail({
         from: `AppCenar <${Mail.user}>`,
@@ -25,7 +25,20 @@ const transporter = nodemailer.createTransport({
   }
 
 
-  const getTemplate = async (name,token) =>{
+  exports.getTemplate = async (name,token) =>{
+    return `
+    <div id="email_content">
+          <h2>Hola ${name}!</h2>
+          <p>Haga click en el siguiente enlace para activar su cuenta.</p>
+
+          <a href= "http://localhost:8000/pages/Auth/confirm.html">Activar cuenta</a>
+    </div>
+    
+    `
+
+  }
+
+  exports.getTemplate2 = async (name,token) =>{
     return `
     <div id="email_content">
           <h2>Hola ${name}!</h2>
@@ -38,9 +51,4 @@ const transporter = nodemailer.createTransport({
     
     `
 
-  }
-
-module.exports = {
-    sendMail,
-    getTemplate
   }
