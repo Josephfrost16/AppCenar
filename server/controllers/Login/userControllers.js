@@ -19,6 +19,7 @@ exports.getAll = async (req,res) =>{
     }
 }
 
+
 exports.getById = async (req,res) =>{
     try {
         const {id} = req.params;
@@ -160,7 +161,6 @@ try{
 }
 }
 
-
 exports.GetNewPassword = async (req, res) => {
 
     const{token,NewPassword}  = req.body;
@@ -176,26 +176,9 @@ exports.GetNewPassword = async (req, res) => {
   
               return res.status(200).json({ passwordToken: token, userId: user.id });
           }
-  
-          Commerce.findOne({
-              where: {
-                resetToken: token,
-              },
-          }).then((commerce)=>{
-             
-              if (commerce){
-  
-                  commerce.password =  Encryption.encrypt(NewPassword); // Asegúrate de usar bcrypt para hashear la nueva contraseña
-                  commerce.resetToken = null;
-                  commerce.resetTokenExpiration = null;
-                  commerce.save();
-                  return res.status(200).json({ passwordToken: token, userId: commerce.id });
-              }
-              return res.status(404).json({ error: "Token invalido o expirado." });
-  
+        return res.status(404).json({ error: "Token invalido o expirado." });
           }).catch((error)=>{
               console.error(err);
               return res.status(500).json({ error: "Error interno del servidor." });
           })
-    })
-  };
+    }

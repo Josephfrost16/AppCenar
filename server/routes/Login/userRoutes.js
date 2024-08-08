@@ -4,7 +4,8 @@ const router = require('express').Router();
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
 
-router.get('/newPassword/:token',controller.GetNewPassword);
+router.post('/newPassword/:token',controller.GetNewPassword);
+
 router.get('/confirm/:token',controller.confirm);
 
 router.post('/',controller.create);
