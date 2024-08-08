@@ -1,6 +1,5 @@
 const User = require('../../models/User/user');
 
-const bcrypt = require('bcrypt');
 
 const Encryption = require('../../helpers/Encryption');
 
@@ -146,7 +145,7 @@ try{
             message: 'Token invalido'
         })
     }
-    
+
     // Actualizar usuario
     user.state = 1;
     await user.save();
@@ -162,5 +161,41 @@ try{
 }
 
 
+exports.GetNewPassword = async (req, res) => {
 
-
+    const{token,NewPassword}  = req.body;
+  
+    User.findOne({where: {resetToken: token}}
+    ).then((user)=>{
+      
+          if (user){
+              user.password =  Encryption.encrypt(NewPassword); 
+              console.log(user.resetToken);
+              user.resetToken = null;
+              user.save();
+  
+              return res.status(200).json({ passwordToken: token, userId: user.id });
+          }
+  
+          Commerce.findOne({
+              where: {
+                resetToken: token,
+              },
+          }).then((commerce)=>{
+             
+              if (commerce){
+  
+                  commerce.password =  Encryption.encrypt(NewPassword); // Asegúrate de usar bcrypt para hashear la nueva contraseña
+                  commerce.resetToken = null;
+                  commerce.resetTokenExpiration = null;
+                  commerce.save();
+                  return res.status(200).json({ passwordToken: token, userId: commerce.id });
+              }
+              return res.status(404).json({ error: "Token invalido o expirado." });
+  
+          }).catch((error)=>{
+              console.error(err);
+              return res.status(500).json({ error: "Error interno del servidor." });
+          })
+    })
+  };
